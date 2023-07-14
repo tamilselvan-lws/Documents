@@ -10,24 +10,27 @@ title: Installing Faveo Helpdesk on Ubuntu With Litespeed Web Server
 ---
 
 
-<img alt="Ubuntu" src="https://www.litespeedtech.com/images/logos/litespeed/litespeed-logo-square.png" width="120" height="120" />
+<img alt="Ubuntu" src="/Images/litespeed-webserver-logo.png" width="120" height="120" />
 
 Faveo can run on [Ubuntu 20.04 (Focal Fosa), Ubuntu 22.04 (Jammy Jellyfish)](http://releases.ubuntu.com/22.04/).
 
-- [<strong>Installation steps :</strong>](#installation-steps-)
-    - [<strong>1. LLMP Installation</strong>](#1-stack-installation)
-    - [<strong>2. Install some Utility packages</strong>](#2-install-some-utility-packages)
+
+# Installation steps
+Faveo depends on the following:
+
+- <strong>Apache</strong> (with mod_rewrite enabled)
+- <strong>PHP 8.1+</strong> with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip
+- <strong>MySQL 8.0+ or MariaDB 10.6+</strong>
+- <strong>SSL</strong> ,Trusted CA Signed or Slef-Signed SSL
 
 
-<a id="installation-steps-" name="installation-steps-"></a>
+## 1. LOMP Installation
 
-<a id="1-stack-installation" name="litespeed-stack-install-"></a>
+The LOMP stack is an acronym for Linux, OpenLiteSpeed, MariaDB, and PHP. OpenLiteSpeed is the open-source option for LiteSpeed web servers. 
 
-## 1. LLMP Installation
+In this tutorial, you will set up a LOMP server running on Ubuntu 22.04. At the time of writing, the current versions are PHP 8.1, MariaDB 10.7, and OpenLiteSpeed 1.7.
 
-<p>Follow the instructions here If you follow this step, no need to install Litespeed, PHP, MySQL separetely as listed below</p>
-
-Run the following commands as sudoers or Login as root user by typing the command below 
+Run the following commands as sudoers or Login as root user by typing the command below
 
 ```
 sudo su
@@ -38,51 +41,90 @@ sudo su
 apt update && apt upgrade -y
 ```
 
+### 1.b.  Installing OpenLiteSpeed
 
-### 1.b. Litespeed
-
-<p>Open port 7080, but only to your IP address</p>
-<p>Use the following UFW command which will allow access to port 7080 only to the IP specified.</p>
+OpenLiteSpeed hosts its code on its own repository. Add this repository to the apt package manager’s sources list with the following command:
 
 ```
-sudo ufw allow from YOUR_IP to any port 7080 proto tcp
+sudo wget -O - https://repo.litespeed.sh | sudo bash
 ```
 
-### Download LS to your server:
 
-Download the LiteSpeed Web Server tarball from the [LiteSpeed Technologies website](http://www.litespeedtech.com/download/litespeed-web-server-download?_gl=1*bxqlqf*_gcl_au*MTkyNzY4NzMxNi4xNjg4OTc5OTI5).
 
-<p>Run the following commands from SSH as root:</p>
+Update the list of repositories to ensure that the newly added repository is scanned by the apt package manager:
 
 ```
-cd /root
-wget http://www.litespeedtech.com/packages/6.0/lsws-6.0.6-ent-x86_64-linux.tar.gz
+sudo apt update
 ```
-### Unpack
-
-Use the following command to unpack the tarball:
+Next, install the openlitespeed package:
 
 ```
-tar zxfv  lsws-*-ent-x86_64-linux.tar.g
+sudo apt install openlitespeed
 ```
-### Run Installation Script
+If prompted, enter your password, then confirm the installation with Y.
 
-Access the unpacked folder:
-```
-cd lsws-*
-```
-
-Create a serial.no file containing your paid license serial number or your trial key:
+Once the installation is complete, verify that OpenLiteSpeed is installed and working correctly by checking its status with the **service** command:
 
 ```
-echo "YOUR_SERIAL_NO" > serial.no
+sudo systemctl status lsws
+```
+The **systemctl status** command obtains the status of a service identified by its keyword. The keyword for the OpenLiteSpeed Web Server service is **lsws**. The **systemctl** command can enable or disable automatic start for services and manually start or stop a service.
+
+You will receive the following output:
+
+**Output**
+``` 
+● lshttpd.service - OpenLiteSpeed HTTP Server
+     Loaded: loaded (/etc/systemd/system/lshttpd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2022-03-16 08:59:09 UTC; 2min 26s ago
+    Process: 32997 ExecStart=/usr/local/lsws/bin/lswsctrl start (code=exited, status=0/SUCCESS)
+   Main PID: 33035 (litespeed)
+     CGroup: /system.slice/lshttpd.service
+             ├─33035 openlitespeed (lshttpd - main)
+             ├─33044 openlitespeed (lscgid)
+             └─33073 openlitespeed (lshttpd - #01)
 ```
 
-Replace YOUR_SERIAL_NO with your actual license serial number or trial key. (Double quotes are optional in this context.)
+You now have an OpenLiteSpeed web server running with its default configuration. You may not be able to access the GUI-based Admin Panel and example website yet, as the firewall blocks traffic to these ports.
 
-Run the install script:
+With your OpenLiteSpeed web server running, you can update the firewall and open the necessary ports to allow users to access the website.
+
+### 1.b. Updating the Firewall
+
+In this step, you will configure the firewall for your server. You will allow traffic over TCP to selected ports for the GUI-based admin panel and example website, as well as ports **80** and **443** for HTTP and HTTPS sites.
+
+The OpenLiteSpeed server bundles a GUI-based admin panel and an example website with the server. The admin panel is an easy-to-use interface for configuring Listeners, Virtual Hosts, SSL, and monitoring logs. The example website features a sample CGI Script, PHP Script, Error Page, and a Password Protected Page. This website can demonstrate the capabilities of the web server.
+
+The GUI-based Admin Panel listens on port **7080** in the default configuration, while the example website listens on port **8088**. You need to allow TCP traffic to these ports via the **ufw** firewall to access these sites.
+
+To provide access, run the following command:
 
 ```
-./install.sh
+sudo ufw allow 7080,80,443,8088/tcp
 ```
-The installer will ask you a number of questions covered in detail [here](http://www.litespeedtech.com/docs/webserver/install?_gl=1*fgcmxe*_gcl_au*MTkyNzY4NzMxNi4xNjg4OTc5OTI5).
+Then, check the status of the firewall rules:
+
+```
+sudo ufw status
+```
+**Output**
+
+```
+Status: active
+
+To                                Action      From
+--                                ------      ----
+OpenSSH                           ALLOW       Anywhere
+80,443,7080,8088/tcp              ALLOW       Anywhere
+OpenSSH (v6)                      ALLOW       Anywhere (v6)
+80,443,7080,8088/tcp (v6)         ALLOW       Anywhere (v6)
+```
+
+You can view the example website through port 8088:
+
+```
+http://your_server_ip:8088
+```
+It should appear like the screencapture below:
+
+<img alt="Ubuntu" src="/Images/op-8088.png" />
