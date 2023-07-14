@@ -1,20 +1,34 @@
 ---
 layout: single
 type: docs
-permalink: /docs/installation/providers/enterprise/litespeed-ubuntu/
+permalink: /docs/installation/providers/enterprise/openlitespeed-ubuntu/
 redirect_from:
   - /theme-setup/
 last_modified_at: 2023-07-14
 toc: true
-title: Installing Faveo Helpdesk on Ubuntu With Litespeed Web Server
+title: Installing Faveo Helpdesk on Ubuntu With Openlitespeed Web Server
 ---
 
 
-<img alt="Ubuntu" src="/Images/litespeed-webserver-logo.png" width="120" height="120" />
+
+<img alt="Ubuntu" src="/Images/openlitespeed_logo_grey_bold.png" width="120" height="120" />
 
 Faveo can run on [Ubuntu 20.04 (Focal Fosa), Ubuntu 22.04 (Jammy Jellyfish)](http://releases.ubuntu.com/22.04/).
 
+  - [<strong>Installation steps :</strong>](#s1)
+    - [<strong>1. LOMP Installation</strong>](#s2)
+    - [<strong>2. Install some Utility packages</strong>](s3)
+    - [<strong>3. Configure Litespeed webserver</strong>](#s4)
+    - [<strong>4. Upload Faveo</strong>](#s5)
+    - [<strong>5. Setup the database</strong>](#s6)
+    - [<strong>6. SSL Installation</strong>](#s7)
+    - [<strong>7. Configure cron job</strong>](#s8)
+    - [<strong>8. Redis Installation</strong>](#s9)
+    - [<strong>9. Install Faveo</strong>](#s10)
+    - [<strong>10. Faveo Backup</strong>](#s11)
+    - [<strong>11. Final step</strong>](#s12)
 
+<a id="s1" name="installation-steps-"></a>
 # Installation steps
 Faveo depends on the following:
 
@@ -24,6 +38,7 @@ Faveo depends on the following:
 - <strong>SSL</strong> ,Trusted CA Signed or Slef-Signed SSL
 
 
+<a id="s2" name="steps-1"></a>
 ### 1. LOMP Installation
 
 The LOMP stack is an acronym for Linux, OpenLiteSpeed, MariaDB, and PHP. OpenLiteSpeed is the open-source option for LiteSpeed web servers. 
@@ -158,6 +173,7 @@ Once authenticated, you will be presented with the OpenLiteSpeed administration 
 The majority of your configuration for the web server will take place via this dashboard.
 
 
+<a id="s3" name="steps-2"></a>
 ### 2. Install some Utility packages
 
 ```
@@ -224,6 +240,8 @@ It uses WebKit rendering layout engine to convert HTML pages to PDF document wit
 ```
 apt-get -y install wkhtmltopdf
 ```
+
+<a id="s4" name="steps-3"></a>
 ### 3. Configure Litespeed webserver
 
 ### 3.a. Configuring LSPHP 8.1
@@ -304,7 +322,7 @@ Set **Enable Rewrite** and Auto Load from *.htaccess* to Yes and click the save 
 
 Once you’ve configured the OpenLiteSpeed server, Click the gracefully restart icon to apply the changes.
 
-
+<a id="s5" name="steps-4"></a>
 ### 4. Upload Faveo
 
 #### For Faveo Freelancer, Paid and Enterprise Version
@@ -343,6 +361,7 @@ find . -type f -exec chmod 644 {} \;
 find . -type d -exec chmod 755 {} \;
 ```
 
+<a id="s6" name="steps-5"></a>
 ### 5. Setup the database
 
 Log in with the root account to configure the database.
@@ -376,6 +395,7 @@ exit
 ```
 
 
+<a id="s7" name="steps-6"></a>
 ### 6.c. SSL Installation
 
 This document will list on how to install LetsEncrypt SSL on Ubuntu Running Apache Web Server
@@ -469,6 +489,8 @@ Choose the virtual host and type in your domain name. Save the settings from the
 
 Once you’ve configured the SSL with your OpenLiteSpeed server, click the gracefully restart icon to apply the changes.
 
+
+<a id="s8" name="steps-7"></a>
 ### 7. Configure cron job
 
 Faveo requires some background processes to continuously run. Basically those crons are needed to receive emails To do this, setup a cron that runs every minute that triggers the following command php artisan schedule:run.Verify your php ececutable location and replace it accordingly in the below command.
@@ -478,7 +500,7 @@ Faveo requires some background processes to continuously run. Basically those cr
 ```
 
 
-
+<a id="s9" name="steps-8"></a>
 ### 8. Redis Installation
 
 Redis is an open-source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
@@ -487,14 +509,19 @@ This is an optional step and will improve system performance and is highly recom
 
 [Redis installation documentation](https://docs.faveohelpdesk.com/docs/installation/providers/enterprise/ubuntu-redis)
 
-### 9. Install FaveoPermalink
+
+<a id="s10" name="steps-9"></a>
+### 9. Install Faveo
 At this point if the domainname is propagated properly with your server’s IP you can open Faveo in browser just by entering your domainname. You can also check the Propagation update by Visiting this site www.whatsmydns.net.
 
 Now you can install Faveo via [GUI](https://docs.faveohelpdesk.com/docs/installation/installer/gui) Wizard or [CLI](https://docs.faveohelpdesk.com/docs/installation/installer/cli)
 
-### 10. Faveo BackupPermalink
+
+<a id="s11" name="steps-10"></a>
+### 10. Faveo Backup
 At this stage, Faveo has been installed, it is time to setup the backup for Faveo File System and Database. [Follow this article](https://docs.faveohelpdesk.com/docs/helper/backup) to setup Faveo backup.
 
 
-### 11. Final stepPermalink
+<a id="s12" name="steps-11"></a>
+### 11. Final step
 The final step is to have fun with your newly created instance, which should be up and running to <code>http://localhost</code> or the domain you have configured Faveo with.
