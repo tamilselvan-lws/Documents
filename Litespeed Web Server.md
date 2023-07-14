@@ -89,7 +89,7 @@ You have now secured the admin account. Next, you will test the server to ensure
 
 In this step, you will connect to your server.
 
-OpenLiteSpeed should have started automatically after it was installed. You can verify if it started with the **systemctl status** command:
+OpenLiteSpeed should have started automatically after it was installed. You can verify if it started with the <code>systemctl status</code> command:
 
 ```
 sudo systemctl status lsws
@@ -98,7 +98,7 @@ sudo systemctl status lsws
 You will receive the following output:
 
 **Output**
-``` 
+```cpp
 ● lshttpd.service - OpenLiteSpeed HTTP Server
      Loaded: loaded (/etc/systemd/system/lshttpd.service; enabled; vendor preset: enabled)
      Active: active (running) since Wed 2022-03-16 08:59:09 UTC; 2min 26s ago
@@ -121,7 +121,7 @@ The systemctl start command will print the following output:
 ```
 [OK] litespeed: pid=5137.
 ```
-The server should now be running. Press **CTRL+C** to exit the service output.
+The server should now be running. Press <code>CTRL+C</code> to exit the service output.
 
 Before visiting it in your browser, you will need to open some ports on your firewall, which you can achieve with the **ufw* command:
 
@@ -140,13 +140,13 @@ Your browser will load the default OpenLiteSpeed web page, which will match the 
 
 You can look around the example website to explore the features offered by the web server.
 
-To see the GUI-based Admin Panel, access port **7080**:
+To see the GUI-based Admin Panel, access port <code>7080</code>:
 
 
 ```
 http://your_server_ip:7080
 ```
-You will likely see a page warning you that the SSL certificate from the server cannot be validated. Because this is a self-signed certificate, this message is expected. Click through the available options to proceed to the site. In Chrome, you must click **Advanced** and then **Proceed to…**.
+You will likely see a page warning you that the SSL certificate from the server cannot be validated. Because this is a self-signed certificate, this message is expected. Click through the available options to proceed to the site. In Chrome, you must click <code>Advanced</code> and then <code>Proceed to…</code> .
 
 You will be prompted to enter the administrative username and password that you selected with the admpass.sh script in the previous step:
 
@@ -173,7 +173,7 @@ Install Mysql 8.0 or MariaDB 10.6. Note that this only installs the package, but
 
 ### For Ubuntu 18.04
 
-```
+```cpp
 sudo apt update
 sudo apt install software-properties-common -y
 curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
@@ -185,7 +185,7 @@ sudo systemctl enable mariadb
 
 ### For Ubuntu 20.04
 
-```
+```cpp
 sudo apt install dirmngr ca-certificates software-properties-common gnupg gnupg2 apt-transport-https curl -y
 curl -fsSL http://repo.mysql.com/RPM-GPG-KEY-mysql-2022 | gpg --dearmor | sudo tee /usr/share/keyrings/mysql.gpg > /dev/null
 echo 'deb [signed-by=/usr/share/keyrings/mysql.gpg] http://repo.mysql.com/apt/ubuntu focal mysql-8.0' | sudo tee -a /etc/apt/sources.list.d/mysql.list
@@ -234,7 +234,7 @@ You will see the following screen:
 
 <img alt="Ubuntu" src="/Images/op-external-app.png" />
 
-Click the **edit** button in the **Actions** column of the first row for **LiteSpeed SAPI App**, which will open an app with the name lsphp. Scroll to the Command field to change its value to <mark style="background-color:#e3e8f4;border-radius:5px;padding:2px">lsphp81/bin/lsphp</mark>   (following the naming convention in Step 4). After configuring this value, scroll to the **LiteSpeed SAPI App** heading and click the **Save** button on the right.
+Click the **edit** button in the **Actions** column of the first row for **LiteSpeed SAPI App**, which will open an app with the name lsphp. Scroll to the Command field to change its value to <code>lsphp81/bin/lsphp</code>  (following the naming convention in Step 4). After configuring this value, scroll to the **LiteSpeed SAPI App** heading and click the **Save** button on the right.
 
 Use the **Graceful Restart** button in the top right to restart the web server. The **Graceful Restart** button is highlighted in the upper right of the following screencapture:
 
