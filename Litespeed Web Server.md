@@ -240,7 +240,7 @@ Use the **Graceful Restart** button in the top right to restart the web server. 
 
 <img alt="Ubuntu" src="/Images/op-gracefull-restart.png" />
 
-Verify that your server is now using the specified PHP version by visiting the informational page at port <mark style="background-color:#e3e8f4;border-radius:5px;padding:2px">8088</mark>:
+Verify that your server is now using the specified PHP version by visiting the informational page at port <code>8088</code>:
 
 The page will now display the specified version number.
 
