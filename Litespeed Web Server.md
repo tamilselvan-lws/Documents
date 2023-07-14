@@ -63,6 +63,12 @@ sudo apt install openlitespeed lsphp81 lsphp81-curl lsphp81-imap lsphp81-mysql l
 ```
 If prompted, enter your password, then confirm the installation with Y.
 
+If prompted, enter your password, then confirm the installation with Y.
+
+This command installs the Openlitespeed server package and LSPHP 8.1. [LiteSpeed PHP (LSPHP)](https://docs.litespeedtech.com/lsws/extapp/php/configuration/options/) is a PHP interpreter integrated with the [LiteSpeed Server Application Programming Interface (LSAPI)](https://www.litespeedtech.com/open-source/litespeed-sapi/php).
+
+Now that the OpenLiteSpeed server is installed, you will secure it by updating the default administrator account.
+
 ### 1.c. Setting the Administrative Password
 
 Before testing the server, you will set a new administrative password for OpenLiteSpeed. You can do this by running a script provided by OpenLiteSpeed:
@@ -158,3 +164,85 @@ The majority of your configuration for the web server will take place via this d
 ```
 apt install -y git wget curl unzip nano zip
 ```
+
+### 2.a. Mysql
+
+The official Faveo installation uses Mysql as the database system and this is the only official system we support. While Laravel technically supports PostgreSQL and SQLite, we can’t guarantee that it will work fine with Faveo as we’ve never tested it. Feel free to read Laravel’s documentation on that topic if you feel adventurous.
+
+Install Mysql 8.0 or MariaDB 10.6. Note that this only installs the package, but does not setup Mysql. This is done later in the instructions:
+
+### For Ubuntu 18.04
+
+```
+sudo apt update
+sudo apt install software-properties-common -y
+curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+sudo bash mariadb_repo_setup --mariadb-server-version=10.6
+sudo apt update
+sudo apt install mariadb-server mariadb-client
+sudo systemctl enable mariadb
+```
+
+### For Ubuntu 20.04
+
+```
+sudo apt install dirmngr ca-certificates software-properties-common gnupg gnupg2 apt-transport-https curl -y
+curl -fsSL http://repo.mysql.com/RPM-GPG-KEY-mysql-2022 | gpg --dearmor | sudo tee /usr/share/keyrings/mysql.gpg > /dev/null
+echo 'deb [signed-by=/usr/share/keyrings/mysql.gpg] http://repo.mysql.com/apt/ubuntu focal mysql-8.0' | sudo tee -a /etc/apt/sources.list.d/mysql.list
+echo 'deb-src [signed-by=/usr/share/keyrings/mysql.gpg] http://repo.mysql.com/apt/ubuntu focal mysql-8.0' | sudo tee -a /etc/apt/sources.list.d/mysql.list
+sudo apt update
+sudo apt install mysql-community-server -y
+sudo systemctl start mysql
+sudo systemctl enable mysql
+```
+
+### For Ubuntu 22.04
+
+```
+sudo apt update
+sudo apt install mariadb-server mariadb-client -y
+sudo systemctl start mariadb
+sudo systemctl enable mariadb
+```
+
+Secure your MySql installation by executing the below command. Set Password for mysql root user, remove anonymous users, disallow remote root login, remove the test databases and finally reload the privilege tables.
+
+```
+mysql_secure_installation 
+```
+phpMyAdmin(Optional): Install phpMyAdmin. This is optional step. phpMyAdmin gives a GUI to access and work with Database
+
+```
+apt install phpmyadmin
+```
+
+### 2.b. Install wkhtmltopdf
+
+Wkhtmltopdf is an open source simple and much effective command-line shell utility that enables user to convert any given HTML (Web Page) to PDF document or an image (jpg, png, etc).
+
+It uses WebKit rendering layout engine to convert HTML pages to PDF document without losing the quality of the pages. Its is really very useful and trustworthy solution for creating and storing snapshots of web pages in real-time.
+
+```
+apt-get -y install wkhtmltopdf
+```
+
+### 3. Configuring LSPHP 8.1
+
+Via **http://your_server_ip:7080**, log in to the Admin Panel (using the credentials you just set up) and navigate to the Server Configuration section. Then, click the External App tab.
+
+You will see the following screen:
+
+<img alt="Ubuntu" src="/Images/op-external-app.png" />
+
+Click the **edit** button in the **Actions** column of the first row for **LiteSpeed SAPI App**, which will open an app with the name lsphp. Scroll to the Command field to change its value to <mark style="background-color:#e3e8f4;border-radius:5px;padding:2px">lsphp81/bin/lsphp</mark>   (following the naming convention in Step 4). After configuring this value, scroll to the **LiteSpeed SAPI App** heading and click the **Save** button on the right.
+
+Use the **Graceful Restart** button in the top right to restart the web server. The **Graceful Restart** button is highlighted in the upper right of the following screencapture:
+
+<img alt="Ubuntu" src="/Images/op-gracefull-restart.png" />
+
+Verify that your server is now using the specified PHP version by visiting the informational page at port <mark style="background-color:#e3e8f4;border-radius:5px;padding:2px">8088</mark>:
+
+The page will now display the specified version number.
+
+In this step, you configured the credentials for the admin panel and set it to use the desired version of PHP. Next, you will set up Virtual Hosts for the different websites that you plan to host on this web server.
+
