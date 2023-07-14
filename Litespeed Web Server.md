@@ -290,3 +290,41 @@ Set **Enable Rewrite** and Auto Load from *.htaccess* to Yes and click the save 
 
 Once you’ve configured the OpenLiteSpeed server, Click the gracefully restart icon to apply the changes.
 
+### 4. Upload Faveo
+
+#### For Faveo Freelancer, Paid and Enterprise Version
+
+Please download Faveo Helpdesk from [https://billing.faveohelpdesk.com](https://billing.faveohelpdesk.com/) and upload it to below directory
+
+Navigate to the virtual host root which is /usr/local/lsws/Example/html
+
+```
+cd /usr/local/lsws/Example/html/
+```
+#### Extracting the Faveo-Codebase zip file
+
+```
+unzip "faveo.zip" -d faveo
+```
+#### For Faveo Community Version
+
+You may install Faveo by simply cloning the repository. In order for this to work with Apache, you need to clone the repository in a specific folder:
+
+```
+cd /usr/local/lsws/Example/html/
+git clone https://github.com/ladybirdweb/faveo-helpdesk.git faveo
+```
+
+You should check out a tagged version of Faveo since master branch may not always be stable. Find the latest official version on the [release page](https://github.com/ladybirdweb/faveo-helpdesk/releases)
+
+Give proper permissions to the project directory by running:You should check out a tagged version of Faveo since master branch may not always be stable. Find the latest official version on the release page
+
+Give proper permissions to the project directory by running:
+
+```
+chown -R nobody:nogroup faveo
+cd faveo
+find . -type f -exec chmod 644 {} \;
+find . -type d -exec chmod 755 {} \;
+```
+
