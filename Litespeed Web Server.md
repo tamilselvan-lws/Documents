@@ -128,3 +128,17 @@ http://your_server_ip:8088
 It should appear like the screencapture below:
 
 <img alt="Ubuntu" src="/Images/op-8088.png" />
+
+You can look around the example website to explore the features offered by the web server.
+
+To see the GUI-based Admin Panel, access port **7080**:
+
+
+```
+http://your_server_ip:7080
+```
+
+Later in this tutorial, you will use the OpenLiteSpeed GUI Admin Panel to configure your web server.
+
+You have now set up the OpenLiteSpeed server on your Ubuntu instance, which will allow you to serve a variety of web applications based on different back-end languages and frameworks. In the next step, you will set up other services of the LOMP stack.
+
