@@ -237,9 +237,9 @@ You will see the following screen:
 Here, you can configure your server to use any specific PHP processor. For this tutorial, we will use lsphp81.
 
 
-- Replace lsphp with lsphp81
-- Replace uds://tmp/lshttpd/lsphp.sock with uds://tmp/lshttpd/lsphp81.sock
-- Replace lsphp74/bin/lsphp with $SERVER_ROOT/lsphp81/bin/lsphp
+- Replace <code>lsphp</code> with <code>lsphp81</code>
+- Replace <code>uds://tmp/lshttpd/lsphp.sock</code> with <code>uds://tmp/lshttpd/lsphp81.sock</code>
+- Replace <code>lsphp74/bin/lsphp</code> with <code>$SERVER_ROOT/lsphp81/bin/lsphp</code>
 
 <img alt="Ubuntu" src="/Images/op-configure-php.png" />
 
