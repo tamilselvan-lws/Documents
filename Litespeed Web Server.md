@@ -24,7 +24,7 @@ Faveo depends on the following:
 - <strong>SSL</strong> ,Trusted CA Signed or Slef-Signed SSL
 
 
-## 1. LOMP Installation
+### 1. LOMP Installation
 
 The LOMP stack is an acronym for Linux, OpenLiteSpeed, MariaDB, and PHP. OpenLiteSpeed is the open-source option for LiteSpeed web servers. 
 
@@ -41,7 +41,7 @@ sudo su
 apt update && apt upgrade -y
 ```
 
-### 1.b.  Installing OpenLiteSpeed
+### 1.b.  Installing OpenLiteSpeed With LSPHP 8.1
 
 OpenLiteSpeed hosts its code on its own repository. Add this repository to the apt package manager’s sources list with the following command:
 
@@ -59,16 +59,35 @@ sudo apt update
 Next, install the openlitespeed package:
 
 ```
-sudo apt install openlitespeed
+sudo apt install openlitespeed lsphp81 lsphp81-curl lsphp81-imap lsphp81-mysql lsphp81-ldap lsphp81-redis lsphp81-ioncube 
 ```
 If prompted, enter your password, then confirm the installation with Y.
 
-Once the installation is complete, verify that OpenLiteSpeed is installed and working correctly by checking its status with the **service** command:
+### 1.c. Setting the Administrative Password
+
+Before testing the server, you will set a new administrative password for OpenLiteSpeed. You can do this by running a script provided by OpenLiteSpeed:
+
+```
+sudo /usr/local/lsws/admin/misc/admpass.sh
+```
+
+You will be asked to provide a username for the administrative user. If you press ENTER without choosing a new username, the default username admin will be used. You can use whatever administrative username you prefer. Then you will be prompted to create and confirm a new password for the account. Put in the administrative password you prefer, then press ENTER again. The script will confirm a successful update:
+
+**Output**
+```
+Administrator's username/password is updated successfully!
+```
+You have now secured the admin account. Next, you will test the server to ensure it’s running properly.
+
+### 1.d. Connecting to the Server
+
+In this step, you will connect to your server.
+
+OpenLiteSpeed should have started automatically after it was installed. You can verify if it started with the **systemctl status** command:
 
 ```
 sudo systemctl status lsws
 ```
-The **systemctl status** command obtains the status of a service identified by its keyword. The keyword for the OpenLiteSpeed Web Server service is **lsws**. The **systemctl** command can enable or disable automatic start for services and manually start or stop a service.
 
 You will receive the following output:
 
@@ -84,48 +103,32 @@ You will receive the following output:
              ├─33044 openlitespeed (lscgid)
              └─33073 openlitespeed (lshttpd - #01)
 ```
+The active (running) message indicates that OpenLiteSpeed is running.
 
-You now have an OpenLiteSpeed web server running with its default configuration. You may not be able to access the GUI-based Admin Panel and example website yet, as the firewall blocks traffic to these ports.
-
-With your OpenLiteSpeed web server running, you can update the firewall and open the necessary ports to allow users to access the website.
-
-### 1.b. Updating the Firewall
-
-In this step, you will configure the firewall for your server. You will allow traffic over TCP to selected ports for the GUI-based admin panel and example website, as well as ports **80** and **443** for HTTP and HTTPS sites.
-
-The OpenLiteSpeed server bundles a GUI-based admin panel and an example website with the server. The admin panel is an easy-to-use interface for configuring Listeners, Virtual Hosts, SSL, and monitoring logs. The example website features a sample CGI Script, PHP Script, Error Page, and a Password Protected Page. This website can demonstrate the capabilities of the web server.
-
-The GUI-based Admin Panel listens on port **7080** in the default configuration, while the example website listens on port **8088**. You need to allow TCP traffic to these ports via the **ufw** firewall to access these sites.
-
-To provide access, run the following command:
+If your server is not running, you can start the server using systemctl:
 
 ```
-sudo ufw allow 7080,80,443,8088/tcp
+sudo systemctl start lsws
 ```
-Then, check the status of the firewall rules:
-
-```
-sudo ufw status
-```
+The systemctl start command will print the following output:
 **Output**
+```
+[OK] litespeed: pid=5137.
+```
+The server should now be running. Press **CTRL+C** to exit the service output.
+
+Before visiting it in your browser, you will need to open some ports on your firewall, which you can achieve with the **ufw* command:
 
 ```
-Status: active
-
-To                                Action      From
---                                ------      ----
-OpenSSH                           ALLOW       Anywhere
-80,443,7080,8088/tcp              ALLOW       Anywhere
-OpenSSH (v6)                      ALLOW       Anywhere (v6)
-80,443,7080,8088/tcp (v6)         ALLOW       Anywhere (v6)
+sudo ufw allow 8088,7080,443,80/tcp
 ```
 
-You can view the example website through port 8088:
+The first port, 8088, is the default port for OpenLiteSpeed’s example site. After allowing it with ufw, it should now be accessible to the public. In your web browser, navigate to your server’s IP address or domain name, followed by :8088 to specify the port:
 
 ```
-http://your_server_ip:8088
+http://server_domain_or_IP:8088
 ```
-It should appear like the screencapture below:
+Your browser will load the default OpenLiteSpeed web page, which will match the following image:
 
 <img alt="Ubuntu" src="/Images/op-8088.png" />
 
@@ -137,8 +140,21 @@ To see the GUI-based Admin Panel, access port **7080**:
 ```
 http://your_server_ip:7080
 ```
+You will likely see a page warning you that the SSL certificate from the server cannot be validated. Because this is a self-signed certificate, this message is expected. Click through the available options to proceed to the site. In Chrome, you must click **Advanced** and then **Proceed to…**.
 
-Later in this tutorial, you will use the OpenLiteSpeed GUI Admin Panel to configure your web server.
+You will be prompted to enter the administrative username and password that you selected with the admpass.sh script in the previous step:
 
-You have now set up the OpenLiteSpeed server on your Ubuntu instance, which will allow you to serve a variety of web applications based on different back-end languages and frameworks. In the next step, you will set up other services of the LOMP stack.
+<img alt="Ubuntu" src="/Images/op-7080.png" />
 
+Once authenticated, you will be presented with the OpenLiteSpeed administration interface:
+
+<img alt="Ubuntu" src="/Images/op-admin-page.png" />
+
+The majority of your configuration for the web server will take place via this dashboard.
+
+
+### 2. Install some Utility packages
+
+```
+apt install -y git wget curl unzip nano zip
+```
