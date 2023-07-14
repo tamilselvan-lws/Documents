@@ -234,15 +234,29 @@ You will see the following screen:
 
 <img alt="Ubuntu" src="/Images/op-external-app.png" />
 
-Click the **edit** button in the **Actions** column of the first row for **LiteSpeed SAPI App**, which will open an app with the name lsphp. Scroll to the Command field to change its value to <code>lsphp81/bin/lsphp</code>  (following the naming convention in Step 4). After configuring this value, scroll to the **LiteSpeed SAPI App** heading and click the **Save** button on the right.
+Here, you can configure your server to use any specific PHP processor. For this tutorial, we will use lsphp81.
+
+
+- Replace lsphp with lsphp81
+- Replace uds://tmp/lshttpd/lsphp.sock with uds://tmp/lshttpd/lsphp81.sock
+- Replace lsphp74/bin/lsphp with $SERVER_ROOT/lsphp81/bin/lsphp
+
+<img alt="Ubuntu" src="/Images/op-configure-php.png" />
 
 Use the **Graceful Restart** button in the top right to restart the web server. The **Graceful Restart** button is highlighted in the upper right of the following screencapture:
+
 
 <img alt="Ubuntu" src="/Images/op-gracefull-restart.png" />
 
 Verify that your server is now using the specified PHP version by visiting the informational page at port <code>8088</code>:
 
+```
+http://your_server_ip:8088/phpinfo.php
+```
+
 The page will now display the specified version number.
 
 In this step, you configured the credentials for the admin panel and set it to use the desired version of PHP. Next, you will set up Virtual Hosts for the different websites that you plan to host on this web server.
+
+### 3.a Setting Up a Virtual Host
 
