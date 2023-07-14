@@ -260,3 +260,33 @@ In this step, you configured the credentials for the admin panel and set it to u
 
 ### 3.a Setting Up a Virtual Host
 
+Moving next to configure the rewrite module which is an essential requirement for the WordPress features. Go to the Virtual Hosts and click on the view icon.
+
+<img alt="Ubuntu" src="/Images/op-edit-virtual-host.png" />
+
+Click on the **General** tab and edit the *General options* with the edit icon at the top right corner.
+
+<img alt="Ubuntu" src="/Images/op-edit-virtual-host-general.png" />
+
+In the **Document Root** field, type <code>$VH_ROOT/html/faveo</code> and click the save button at the top right corner.
+
+<img alt="Ubuntu" src="/Images/op-virtual-host-general.png" />
+
+Then again on the **General** tab of *Virtual Hosts* configuration, click the edit icon next to the *Index Files* section.
+
+<img alt="Ubuntu" src="/Images/op-virtual-host-general-1.png" />
+
+In the **Index Files** field, add *index.php* at the beginning of the section. Then click the save button at the top right corner.
+
+<img alt="Ubuntu" src="/Images/op-virtual-host-index.png" />
+
+Next, go to the **Rewrite tab** of the *Virtual Hosts* configuration view and edit the *Rewrite Control* options.
+
+<img alt="Ubuntu" src="/Images/op-virtual-host-rewrites.png" />
+
+Set **Enable Rewrite** and Auto Load from *.htaccess* to Yes and click the save icon at the top right corner.
+
+<img alt="Ubuntu" src="/Images/op-rewrite-control.png" />
+
+Once you’ve configured the OpenLiteSpeed server, Click the gracefully restart icon to apply the changes.
+
