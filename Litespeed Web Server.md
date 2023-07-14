@@ -254,9 +254,23 @@ Verify that your server is now using the specified PHP version by visiting the i
 http://your_server_ip:8088/phpinfo.php
 ```
 
-The page will now display the specified version number.
+After installing LSPHP 8.1, run the commands below to open PHP default config file.
 
-In this step, you configured the credentials for the admin panel and set it to use the desired version of PHP. Next, you will set up Virtual Hosts for the different websites that you plan to host on this web server.
+```
+nano /usr/local/lsws/lsphp81/etc/php/8.1/litespeed/php.ini
+```
+Then make the changes on the following lines below in the file and save. The value below are great settings to apply in your environment.
+
+```
+file_uploads = On
+allow_url_fopen = On
+short_open_tag = On
+memory_limit = 256M
+cgi.fix_pathinfo = 0
+upload_max_filesize = 100M
+post_max_size = 100M
+max_execution_time = 360
+```
 
 ### 3.a Setting Up a Virtual Host
 
