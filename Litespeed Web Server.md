@@ -375,6 +375,7 @@ FLUSH PRIVILEGES;
 exit
 ```
 
+
 ### 6.c. SSL Installation
 
 This document will list on how to install LetsEncrypt SSL on Ubuntu Running Apache Web Server
@@ -468,8 +469,32 @@ Choose the virtual host and type in your domain name. Save the settings from the
 
 Once you’ve configured the SSL with your OpenLiteSpeed server, click the gracefully restart icon to apply the changes.
 
+### 7. Configure cron job
+
+Faveo requires some background processes to continuously run. Basically those crons are needed to receive emails To do this, setup a cron that runs every minute that triggers the following command php artisan schedule:run.Verify your php ececutable location and replace it accordingly in the below command.
+
+```
+(sudo -u www-data crontab -l 2>/dev/null; echo "* * * * * /usr/bin/php /var/www/faveo/artisan schedule:run 2>&1") | sudo -u www-data crontab -
+```
 
 
 
+### 8. Redis Installation
+
+Redis is an open-source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
+
+This is an optional step and will improve system performance and is highly recommended.
+
+[Redis installation documentation](https://docs.faveohelpdesk.com/docs/installation/providers/enterprise/ubuntu-redis)
+
+### 9. Install FaveoPermalink
+At this point if the domainname is propagated properly with your server’s IP you can open Faveo in browser just by entering your domainname. You can also check the Propagation update by Visiting this site www.whatsmydns.net.
+
+Now you can install Faveo via [GUI](https://docs.faveohelpdesk.com/docs/installation/installer/gui) Wizard or [CLI](https://docs.faveohelpdesk.com/docs/installation/installer/cli)
+
+### 10. Faveo BackupPermalink
+At this stage, Faveo has been installed, it is time to setup the backup for Faveo File System and Database. [Follow this article](https://docs.faveohelpdesk.com/docs/helper/backup) to setup Faveo backup.
 
 
+### 11. Final stepPermalink
+The final step is to have fun with your newly created instance, which should be up and running to <code>http://localhost</code> or the domain you have configured Faveo with.
