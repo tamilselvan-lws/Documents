@@ -63,7 +63,6 @@ sudo apt install openlitespeed lsphp81 lsphp81-curl lsphp81-imap lsphp81-mysql l
 ```
 If prompted, enter your password, then confirm the installation with Y.
 
-If prompted, enter your password, then confirm the installation with Y.
 
 This command installs the Openlitespeed server package and LSPHP 8.1. [LiteSpeed PHP (LSPHP)](https://docs.litespeedtech.com/lsws/extapp/php/configuration/options/) is a PHP interpreter integrated with the [LiteSpeed Server Application Programming Interface (LSAPI)](https://www.litespeedtech.com/open-source/litespeed-sapi/php).
 
@@ -225,8 +224,9 @@ It uses WebKit rendering layout engine to convert HTML pages to PDF document wit
 ```
 apt-get -y install wkhtmltopdf
 ```
+### 3. Configure Litespeed webserver
 
-### 3. Configuring LSPHP 8.1
+### 3.a. Configuring LSPHP 8.1
 
 Via **http://your_server_ip:7080**, log in to the Admin Panel (using the credentials you just set up) and navigate to the Server Configuration section. Then, click the External App tab.
 
@@ -272,7 +272,7 @@ post_max_size = 100M
 max_execution_time = 360
 ```
 
-### 3.a Setting Up a Virtual Host
+### 3.b Setting Up a Virtual Host
 
 Moving next to configure the rewrite module which is an essential requirement for the WordPress features. Go to the Virtual Hosts and click on the view icon.
 
@@ -303,6 +303,7 @@ Set **Enable Rewrite** and Auto Load from *.htaccess* to Yes and click the save 
 <img alt="Ubuntu" src="/Images/op-rewrite-control.png" />
 
 Once you’ve configured the OpenLiteSpeed server, Click the gracefully restart icon to apply the changes.
+
 
 ### 4. Upload Faveo
 
@@ -341,4 +342,134 @@ cd faveo
 find . -type f -exec chmod 644 {} \;
 find . -type d -exec chmod 755 {} \;
 ```
+
+### 5. Setup the database
+
+Log in with the root account to configure the database.
+
+```
+mysql -u root -p
+```
+
+Create a database called ‘faveo’.
+
+```
+CREATE DATABASE faveo;
+```
+
+Create a user called ‘faveo’ and its password ‘strongpassword’.
+
+```
+CREATE USER 'faveo'@'localhost' IDENTIFIED BY 'strongpassword';
+```
+We have to authorize the new user on the faveo db so that he is allowed to change the database.
+
+```
+GRANT ALL ON faveo.* TO 'faveo'@'localhost';
+```
+
+And finally we apply the changes and exit the database.
+
+```
+FLUSH PRIVILEGES;
+exit
+```
+
+### 6.c. SSL Installation
+
+This document will list on how to install LetsEncrypt SSL on Ubuntu Running Apache Web Server
+
+PS : Please replace example.com with your valid domain name which is mapped with your server
+
+We will install following dependencies in order to make LetsEncrypt SSL work:
+
+- certbot
+
+### Downloading the LetsEncrypt client for Ubuntu
+
+```
+sudo apt install certbot
+```
+
+### Setting up the SSL certificate
+
+Certbot will handle the SSL certificate management quite easily, it will generate a new certificate for provided domain as a parameter.
+
+In this case, example.com will be used as the domain for which the certificate will be issued:
+
+```
+certbot certonly --webroot -w /usr/local/lsws/Example/html/faveo -d example.com
+```
+
+You will then be prompted to answer the following questions.
+
+- Enter Email address: Type in your email address
+- Accept the terms of service: A
+- Share your Email Address with EFF: Type Y for yes and N for No.
+- Enter Domain name: Type your FQDN (fully qualified domain name) here
+- Input the Web root: /usr/local/lsws/Example/html/faveo/
+
+Once you have answered all the questions and validation process is complete, the certificate files will be saved in /etc/letsencrypt/live/**example.com**/ directory
+
+**Output**
+
+```cpp
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/example.com/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/example.com/privkey.pem
+
+```
+
+Next, configure the WordPress site on your OpenLiteSpeed server to use the SSL certificate. Navigate to the Virtual Host configuration and open the SSL tab. Edit the SSL Private Key & Certificate.
+
+<img alt="Ubuntu" src="/Images/op-add-ssl-keys.png" />
+
+Type the fields as follows:
+
+```
+Private Key File: /etc/letsencrypt/live/<your-domain>/privkey.pem
+Certificate File: /etc/letsencrypt/live/<your-domain>/fullchain.pem
+Chained Certificate: Yes
+CA Certificate Path: /etc/letsencrypt/live/<your-domain>/fullchain.pem
+CA Certificate File: /etc/letsencrypt/live/<your-domain>/fullchain.pem
+```
+<img alt="Ubuntu" src="/Images/op-ssl-keys.png" />
+
+Once completed, go to Listeners and add a new listener.
+
+<img alt="Ubuntu" src="/Images/op-add-listener.png" />
+
+Fill in the fields as follows:
+
+```
+Listener Name: SSL
+IP Address: ANY
+Post: 443
+Binding:
+Enable REUSEPORT: Not Set
+Secure: Yes
+```
+
+Once all set, apply the new settings by clicking the save icon on the right.
+
+<img alt="Ubuntu" src="/Images/op-listener-enable-secure.png" />
+
+Next, view the SSL listener to configure the Virtual host mapping.
+
+<img alt="Ubuntu" src="/Images/op-ssl-listener.png" />
+
+Add a row in Virtual Host Mappings.
+
+<img alt="Ubuntu" src="/Images/op-add-virtual-host.png" />
+
+Choose the virtual host and type in your domain name. Save the settings from the save button on the top right corner.
+
+<img alt="Ubuntu" src="/Images/op-virtual-host-domains.png" />
+
+Once you’ve configured the SSL with your OpenLiteSpeed server, click the gracefully restart icon to apply the changes.
+
+
+
+
+
 
