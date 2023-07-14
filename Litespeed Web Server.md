@@ -11,7 +11,7 @@ title: Installing Faveo Helpdesk on Ubuntu With Openlitespeed Web Server
 
 
 
-<img alt="Ubuntu" src="/Images/openlitespeed_logo_grey_bold.png" width="120" height="120" />
+<img alt="Ubuntu" src="/Images/openlitespeed_logo_grey_bold.png" width="100%" height="120" />
 
 Faveo can run on [Ubuntu 20.04 (Focal Fosa), Ubuntu 22.04 (Jammy Jellyfish)](http://releases.ubuntu.com/22.04/).
 
