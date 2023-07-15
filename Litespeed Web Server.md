@@ -32,7 +32,7 @@ Faveo can run on [Ubuntu 20.04 (Focal Fosa), Ubuntu 22.04 (Jammy Jellyfish)](htt
 # Installation steps
 Faveo depends on the following:
 
-- <strong>Apache</strong> (with mod_rewrite enabled)
+- <strong>Web Server</strong>  Openlitespeed
 - <strong>PHP 8.1+</strong> with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip
 - <strong>MySQL 8.0+ or MariaDB 10.6+</strong>
 - <strong>SSL</strong> ,Trusted CA Signed or Slef-Signed SSL
