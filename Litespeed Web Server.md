@@ -43,7 +43,7 @@ Faveo depends on the following:
 
 The LOMP stack is an acronym for Linux, OpenLiteSpeed, MariaDB, and PHP. OpenLiteSpeed is the open-source option for LiteSpeed web servers. 
 
-In this tutorial, you will set up a LOMP server running on Ubuntu 22.04. At the time of writing, the current versions are PHP 8.1, MariaDB 10.7, and OpenLiteSpeed 1.7.
+In this tutorial, you will set up a LOMP server running on Ubuntu 22.04. At the time of writing, the current versions are PHP 8.1, MariaDB 10.6, and OpenLiteSpeed 1.7.
 
 Run the following commands as sudoers or Login as root user by typing the command below
 
