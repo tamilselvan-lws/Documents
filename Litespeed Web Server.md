@@ -18,8 +18,8 @@ Faveo can run on [Ubuntu 20.04 (Focal Fosa), Ubuntu 22.04 (Jammy Jellyfish)](htt
   - [<strong>Installation steps :</strong>](#s1)
     - [<strong>1. LOMP Installation</strong>](#s2)
     - [<strong>2. Install some Utility packages</strong>](s3)
-    - [<strong>3. Configure Litespeed webserver</strong>](#s4)
-    - [<strong>4. Upload Faveo</strong>](#s5)
+    - [<strong>3. Upload Faveo</strong>](#s4)
+    - [<strong>4. Configure Litespeed webserver</strong>](#s5)
     - [<strong>5. Setup the database</strong>](#s6)
     - [<strong>6. SSL Installation</strong>](#s7)
     - [<strong>7. Configure cron job</strong>](#s8)
@@ -285,10 +285,50 @@ echo "deb http://security.ubuntu.com/ubuntu focal-security main" | sudo tee /etc
 
 Once the softwares above are installed:
 
-<a id="s4" name="steps-3"></a>
-### 3. Configure Litespeed webserver
 
-### 3.a. Configuring LSPHP 8.1
+<a id="s4" name="steps-3"></a>
+### 3. Upload Faveo
+
+#### For Faveo Freelancer, Paid and Enterprise Version
+
+Please download Faveo Helpdesk from [https://billing.faveohelpdesk.com](https://billing.faveohelpdesk.com/) and upload it to below directory
+
+Navigate to the virtual host root which is /usr/local/lsws/Example/html
+
+```
+cd /usr/local/lsws/Example/html/
+```
+#### Extracting the Faveo-Codebase zip file
+
+```
+unzip "faveo.zip" -d faveo
+```
+#### For Faveo Community Version
+
+You may install Faveo by simply cloning the repository. In order for this to work with Apache, you need to clone the repository in a specific folder:
+
+```
+cd /usr/local/lsws/Example/html/
+git clone https://github.com/ladybirdweb/faveo-helpdesk.git faveo
+```
+
+You should check out a tagged version of Faveo since master branch may not always be stable. Find the latest official version on the [release page](https://github.com/ladybirdweb/faveo-helpdesk/releases)
+
+Give proper permissions to the project directory by running:You should check out a tagged version of Faveo since master branch may not always be stable. Find the latest official version on the release page
+
+Give proper permissions to the project directory by running:
+
+```
+chown -R nobody:nogroup faveo
+cd faveo
+find . -type f -exec chmod 644 {} \;
+find . -type d -exec chmod 755 {} \;
+```
+
+<a id="s5" name="steps-4"></a>
+### 4. Configure Litespeed webserver
+
+### 4.a. Configuring LSPHP 8.1
 
 Via **http://your_server_ip:7080**, log in to the Admin Panel (using the credentials you just set up) and navigate to the Server Configuration section. Then, click the External App tab.
 
@@ -334,7 +374,7 @@ post_max_size = 100M
 max_execution_time = 360
 ```
 
-### 3.b Setting Up a Virtual Host
+### 4.b Setting Up a Virtual Host
 
 Moving next to configure the rewrite module which is an essential requirement for the WordPress features. Go to the Virtual Hosts and click on the view icon.
 
@@ -366,44 +406,7 @@ Set **Enable Rewrite** and Auto Load from *.htaccess* to Yes and click the save 
 
 Once you’ve configured the OpenLiteSpeed server, Click the gracefully restart icon to apply the changes.
 
-<a id="s5" name="steps-4"></a>
-### 4. Upload Faveo
 
-#### For Faveo Freelancer, Paid and Enterprise Version
-
-Please download Faveo Helpdesk from [https://billing.faveohelpdesk.com](https://billing.faveohelpdesk.com/) and upload it to below directory
-
-Navigate to the virtual host root which is /usr/local/lsws/Example/html
-
-```
-cd /usr/local/lsws/Example/html/
-```
-#### Extracting the Faveo-Codebase zip file
-
-```
-unzip "faveo.zip" -d faveo
-```
-#### For Faveo Community Version
-
-You may install Faveo by simply cloning the repository. In order for this to work with Apache, you need to clone the repository in a specific folder:
-
-```
-cd /usr/local/lsws/Example/html/
-git clone https://github.com/ladybirdweb/faveo-helpdesk.git faveo
-```
-
-You should check out a tagged version of Faveo since master branch may not always be stable. Find the latest official version on the [release page](https://github.com/ladybirdweb/faveo-helpdesk/releases)
-
-Give proper permissions to the project directory by running:You should check out a tagged version of Faveo since master branch may not always be stable. Find the latest official version on the release page
-
-Give proper permissions to the project directory by running:
-
-```
-chown -R nobody:nogroup faveo
-cd faveo
-find . -type f -exec chmod 644 {} \;
-find . -type d -exec chmod 755 {} \;
-```
 
 <a id="s6" name="steps-5"></a>
 ### 5. Setup the database
