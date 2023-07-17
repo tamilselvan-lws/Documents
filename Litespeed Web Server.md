@@ -237,9 +237,26 @@ Wkhtmltopdf is an open source simple and much effective command-line shell utili
 
 It uses WebKit rendering layout engine to convert HTML pages to PDF document without losing the quality of the pages. Its is really very useful and trustworthy solution for creating and storing snapshots of web pages in real-time.
 
-```
+
+### For Ubuntu 18.04 and 20.04
+
+```cpp
 apt-get -y install wkhtmltopdf
 ```
+
+### For Ubuntu 22.04
+
+```cpp
+echo "deb http://security.ubuntu.com/ubuntu focal-security main" | sudo tee /etc/apt/sources.list.d/focal-security.list
+        apt-get update; apt install libssl1.1 -y
+        wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb 
+    
+        dpkg -i wkhtmltox_0.12.6-1.focal_amd64.deb
+        apt --fix-broken install -y
+
+```
+
+Once the softwares above are installed:
 
 <a id="s4" name="steps-3"></a>
 ### 3. Configure Litespeed webserver
