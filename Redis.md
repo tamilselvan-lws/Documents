@@ -19,7 +19,7 @@ sudo su
 ### Install Redis and PHP redis extension
 
 ```
-sudo apt install redis lsphp81
+sudo apt install redis lsphp81-redis
 ```
 ### Start, Enable and restart the Redis-service
 
