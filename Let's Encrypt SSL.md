@@ -53,7 +53,9 @@ Next, configure the Faveo site on your OpenLiteSpeed server to use the SSL certi
 
 <img alt="Ubuntu" src="/Images/op-ssl-keys.png" />
 
-Navigate to the Virtual Host configuration and open the SSL tab. Edit the Security.
+Open the SSL tab. Edit the Security.
+
+<img alt="Ubuntu" src="/Images/op-ssl-security-1.png" />
 
 Fill in the fields as follows:
 
@@ -64,8 +66,6 @@ Enable Session Tickets: Not Set
 ALPN: HTTP/2,HTTP/3 
 Enable HTTP3/QUIC: Yes
 ```
-
-<img alt="Ubuntu" src="/Images/op-ssl-security-1.png" />
 
 <img alt="Ubuntu" src="/Images/op-ssl-security-2.png" />
 
