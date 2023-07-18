@@ -125,17 +125,15 @@ You will receive the following output:
 ```
 The active (running) message indicates that OpenLiteSpeed is running.
 
+The server should now be running. Press <code>CTRL+C</code> to exit the service output.
+
 If your server is not running, you can start the server using systemctl:
 
 ```
 sudo systemctl start lsws
 ```
-The systemctl start command will print the following output:
-**Output**
-```
-[OK] litespeed: pid=5137.
-```
-The server should now be running. Press <code>CTRL+C</code> to exit the service output.
+
+
 
 Before visiting it in your browser, you will need to open some ports on your firewall, which you can achieve with the **ufw* command:
 
@@ -190,6 +188,14 @@ This action will load a page with more details about the **Default listener**. C
 This button will open a new screen. Change port <code>8088</code> to port <code>80</code>, then click the **Save** button (the floppy disk symbol):
 
 <img alt="Ubuntu" src="/Images/op-default-listener-3.png" />
+
+Next, view the SSL listener to configure the **Virtual host mapping**.
+
+<img alt="Ubuntu" src="/Images/op-listener-mapping.png" />
+
+Choose the virtual host and type in your domain name. Save the settings from the save button on the top right corner.
+
+<img alt="Ubuntu" src="/Images/op-listener-mapping-domain.png" />
 
 After saving the modification, you will need to restart the server. Click the arrow icon for the Graceful Restart action that will restart OpenLiteSpeed:
 
