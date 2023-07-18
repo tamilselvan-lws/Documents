@@ -15,29 +15,11 @@ Switch to root user or run the following commands as sudoers.
 ```
 sudo su
 ```
-### PHP 8.1+
 
-First add this PPA repository:
-
-```
-add-apt-repository ppa:ondrej/php
-```
-
-Then install php 8.1 with these extensions:
+### Install Redis and PHP redis extension
 
 ```
-apt update
-apt install -y php8.1 libapache2-mod-php8.1 php8.1-mysql \
-    php8.1-cli php8.1-common php8.1-fpm php8.1-soap php8.1-gd \
-    php8.1-opcache  php8.1-mbstring php8.1-zip \
-    php8.1-bcmath php8.1-intl php8.1-xml php8.1-curl  \
-    php8.1-imap php8.1-ldap php8.1-gmp php8.1-redis
-```
-
-### Install Redis and LSPHP redis extension
-
-```
-sudo apt install redis lsphp81-redis
+sudo apt install redis lsphp81
 ```
 ### Start, Enable and restart the Redis-service
 
