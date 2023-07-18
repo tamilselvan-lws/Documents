@@ -47,11 +47,9 @@ Key is saved at:         /etc/letsencrypt/live/example.com/privkey.pem
 
 ```
 
-Next, configure the WordPress site on your OpenLiteSpeed server to use the SSL certificate. Navigate to the Virtual Host configuration and open the SSL tab. Edit the SSL Private Key & Certificate.
+Next, configure the Faveo site on your OpenLiteSpeed server to use the SSL certificate. Navigate to the Virtual Host configuration and open the SSL tab. Edit the SSL Private Key & Certificate.
 
 <img alt="Ubuntu" src="/Images/op-add-ssl-keys.png" />
-
-
 
 <img alt="Ubuntu" src="/Images/op-ssl-keys.png" />
 
@@ -86,8 +84,67 @@ Choose the virtual host and type in your domain name. Save the settings from the
 
 <img alt="Ubuntu" src="/Images/op-virtual-host-domains.png" />
 
+Next, configure the Faveo site on your OpenLiteSpeed server to use the SSL certificate. Navigate to the SSL listener configuration and open the SSL tab. Edit the SSL Private Key & Certificate.
+
+<img alt="Ubuntu" src="/Images/op-listener-ssl-1.png" />
+
+<img alt="Ubuntu" src="/Images/op-listener-ssl-2.png" />
+
+
 Once you’ve configured the SSL with your OpenLiteSpeed server, click the gracefully restart icon to apply the changes.
 
+### SWITCH TO TERMINAL
+```
+sudo ufw allow 443/udp
+sudo ufw status verbose
+```
+
+### TEST HTTP3/QUIC
+[https://www.http3check.net/](https://www.http3check.net/)
 
 ### Setting up auto renewal of the certificate
 
+For a list of certificates installed on your server:
+
+```
+sudo certbot certificates
+```
+sudo certbot renew will renew all certs installed on the server. You can run the command with the --dry-run
+flag simulate the renewal, having --dry-run will not renew the certs.
+
+```
+sudo certbot renew --dry-run
+```
+
+Another flag we will use is the --force-renewal, which we will make use of to force the renewals on a particular
+date.
+
+```
+sudo certbot renew --force-renewal
+```
+
+Reload LSWS after renewing your certs
+
+```
+sudo /usr/local/lsws/bin/lswsctrl reload
+```
+
+### CRON COMMANDS
+
+```
+sudo crontab -l
+```
+
+The above command will list the root cron jobs To create a new root cron, the command is:
+
+```
+sudo crontab -e
+```
+
+Scroll to the end and add the cron:
+
+```
+m h dom mon dow command
+30 2 7 * * certbot renew --force-renewal
+00 3 7 * * /usr/local/lsws/bin/lswsctrl reload
+```
