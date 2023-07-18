@@ -428,7 +428,7 @@ Click on the **General** tab and edit the *General options* with the edit icon a
 
 In the **Document Root** field, type <code>$VH_ROOT/html/faveo</code>
 
-In the **Domain Name** field, type <codee>example.com</code>and click the save button at the top right corner.
+In the **Domain Name** field, type <code>example.com</code> and click the save button at the top right corner.
 
 <img alt="Ubuntu" src="/Images/op-virtual-host-general.png" />
 
