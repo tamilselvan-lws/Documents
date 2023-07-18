@@ -189,7 +189,8 @@ This button will open a new screen. Change port <code>8088</code> to port <code>
 
 <img alt="Ubuntu" src="/Images/op-default-listener-3.png" />
 
-Next, view the SSL listener to configure the **Virtual host mapping**.
+Next, view the <code>Example</code> listener to configure the **Virtual host mapping**.
+
 
 <img alt="Ubuntu" src="/Images/op-listener-mapping.png" />
 
