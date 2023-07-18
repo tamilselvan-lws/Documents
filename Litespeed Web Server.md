@@ -493,10 +493,7 @@ Secure Sockets Layer (SSL) is a standard security technology for establishing an
 
 Faveo Requires HTTPS so the SSL is a must to work with the latest versions of faveo, so for the internal network and if there is no domain for free you can use the Self-Signed-SSL.
 
-[Let’s Encrypt SSL installation documentation]()
-
-[Self Signed SSL Certificate Documentation]()
-
+[Let’s Encrypt SSL installation documentation](/Litespeed%20Web%20Server.md)
 
 
 
@@ -520,7 +517,7 @@ Redis is an open-source (BSD licensed), in-memory data structure store, used as 
 
 This is an optional step and will improve system performance and is highly recommended.
 
-[Redis installation documentation]()
+[Redis installation documentation](/Redis.md)
 
 
 <a id="s10" name="steps-9"></a>
