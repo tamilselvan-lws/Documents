@@ -1,0 +1,72 @@
+order:
+1.2FA
+2.Zabbix
+3.Ansible
+4.Webmin
+5.Webmin CSF
+
+https://wiki.faveotools.com
+
+1.2fa wiki.
+
+2.Zabbix wiki.
+
+3.ansible:
+
+creating user: 
+useradd -m -s /bin/bash patchman
+passwd patchman
+default password: #r6u24wfWN9brEF23ddeD5EiG%rEkaYG4XXDCzzsBmgm12deX2cCwBGn4HOv6msxzle*c@ye@f2PLu0OoYDIQS^tTnMeiO3hg5b
+
+adding to sudo group:
+usermod -aG sudo patchman
+
+allowing user to ssh:
+nano /etc/ssh/sshd_config
+AllowUsers lwsadmin patchman
+
+adding lwscp12 public ssh key:
+cd /home/patchman
+mkdir .ssh
+nano .ssh/authorized_keys
+paste the below:
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5drRM2z5EG/rgyIy9J6IDaDWaBp51MmOsdJxsJbZAS80viZTGyJW1208XFcTUspHHoiJx4MbBSW31Q3aZNls7ShEsGKyYjlfOgch33S+A3DpFDHp5UluB3A3ZVH7YeQzWST1rT95P5sYoGbvZ1sz2ENjmnyaur3VDeWXTzVAmtguMVtQzbv9MDaTjdCJVYS1i2sBXeR7W76A9ZoEKwZChpljTNPi2XkQMCWpdsVeNwpV3Y7/sIh6HisEYEf7scM3u+NN1NGym+nt4Fr0LZ0O7n3iy9giN5n2yeN65JBjefsjbi5fB36ZMgnM+Bc4IK4kNFMZ6oM+ZfpQZyECUbEUHvI0lH2CU0M33/5LnycJE+LWdtE2Njgh1iIFSJAL6qGLZMcN+hVD37wNnF0PCFqcwtjL3EJywOyRWlxove5bUUgyKB4ueMCgHKOtN06H4t0rRkDUONV6TGHdYlW1s1Xd6uz66G5nElX3b+U71xmSR8vvArjKfJfUBY8vKTfyRQMRKmizt9mSh9D4EMFdYLiaxXmlQgWt1LQDVWEdC8xwBv6SICuVSNNA9Sy3SWvRvCpif2lPMbn0sPeRJhei5GCnUNQ9BKLjSyksDuEL0Z7Ker49n7EVTrMN0eoFSS9x1+zMjrN6zQFJ2IbzIr9ltXmo/a4/7CoaDju9klagd9I4/Dw== lwsadmin@cp-12.ladybirdhost.com
+
+restarting ssh service:
+systemctl restart ssh
+
+login to https://ansible.faveotools.com
+
+Resources > Hosts > add > 
+Name , Discription , inventory default- LWS-servers.
+under Variables:
+---
+ansible_host: server IP
+ansible_port: server ssh Port.
+
+from lwscp12 (i.e ansible server) ssh to newly added server.
+PLat!ejEszbdSieXZP8GX^4u886F2IcgX&#lytlwWuOm^Ax9r&CAS7zfIWn2OEOv6T1M$K2RWUblngDqTM1MR5yS2AVVw09FVBW  - cp-12 lwsadmin ssh key pass
+
+after login to patchman in new server try:
+sudo su
+#r6u24wfWN9brEF23ddeD5EiG%rEkaYG4XXDCzzsBmgm12deX2cCwBGn4HOv6msxzle*c@ye@f2PLu0OoYDIQS^tTnMeiO3hg5b  - patchman user passowrd
+
+
+Ansible login: 
+Ansible:	http://ansible.faveotools.com			lwsadmin	tuqit6@tRaMac45=7f-it5Yan
+
+
+4. Webmin:
+	1. ssl
+	2. 2fa
+	3. csf
+	4. Port and Ip whitelist on csf.
+	
+5. SSH allow and deny:
+nano /etc/hosts.allow
+sshd,sshdfwd-X11: 49.207.204.115, 122.171.17.41, 223.177.180.116, 49.36.193.219, 161.97.174.31, 65.108.255.49, 65.109.171.66, 65.21.255.69
+
+nano /etc/hosts.deny:
+sshd,sshdfwd-X11:ALL
+
+

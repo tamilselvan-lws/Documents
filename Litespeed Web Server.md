@@ -206,8 +206,43 @@ The default web page should now be accessible in your browser on port <code>80</
 ```
 apt install -y git wget curl unzip nano zip
 ```
+### 2.a. PHP 8.1+
 
-### 2.a. Mysql
+First add this PPA repository:
+
+```
+add-apt-repository ppa:ondrej/php
+```
+
+Then install php 8.1 with these extensions:
+
+```
+apt update
+apt install -y php8.1 libapache2-mod-php8.1 php8.1-mysql \
+    php8.1-cli php8.1-common php8.1-fpm php8.1-soap php8.1-gd \
+    php8.1-opcache  php8.1-mbstring php8.1-zip \
+    php8.1-bcmath php8.1-intl php8.1-xml php8.1-curl  \
+    php8.1-imap php8.1-ldap php8.1-gmp php8.1-redis
+```
+
+### 2.b. Setting Up IonCube
+
+```
+wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz 
+tar xvfz ioncube_loaders_lin_x86-64.tar.gz 
+```
+Copy the ion-cube loader to Directory. Replace your yourpath below with actual path that was shown with the output of first command below, and restart the both nginx and php.
+
+```
+php -i | grep extension_dir
+cp ioncube/ioncube_loader_lin_8.1.so /usr/lib/php/'replaceyourpath'
+sed -i '2 a zend_extension = "/usr/lib/php/'replaceyourpath'/ioncube_loader_lin_8.1.so"' /etc/php/8.1/fpm/php.ini
+sed -i '2 a zend_extension = "/usr/lib/php/'replaceyourpath'/ioncube_loader_lin_8.1.so"' /etc/php/8.1/cli/php.ini
+systemctl restart lsws
+systemctl restart php8.1-fpm
+```
+
+### 2.c. MySQL
 
 The official Faveo installation uses Mysql as the database system and this is the only official system we support. While Laravel technically supports PostgreSQL and SQLite, we can’t guarantee that it will work fine with Faveo as we’ve never tested it. Feel free to read Laravel’s documentation on that topic if you feel adventurous.
 
@@ -258,7 +293,7 @@ phpMyAdmin(Optional): Install phpMyAdmin. This is optional step. phpMyAdmin give
 apt install phpmyadmin
 ```
 
-### 2.b. Install wkhtmltopdf
+### 2.d. Install wkhtmltopdf
 
 Wkhtmltopdf is an open source simple and much effective command-line shell utility that enables user to convert any given HTML (Web Page) to PDF document or an image (jpg, png, etc).
 
@@ -384,7 +419,9 @@ Click on the **General** tab and edit the *General options* with the edit icon a
 
 <img alt="Ubuntu" src="/Images/op-edit-virtual-host-general.png" />
 
-In the **Document Root** field, type <code>$VH_ROOT/html/faveo</code> and click the save button at the top right corner.
+In the **Document Root** field, type <code>$VH_ROOT/html/faveo</code>
+
+In the **Domain Name** field, type <codee>example.com</code>and click the save button at the top right corner.
 
 <img alt="Ubuntu" src="/Images/op-virtual-host-general.png" />
 
@@ -443,98 +480,17 @@ exit
 
 
 <a id="s7" name="steps-6"></a>
-### 6.c. SSL Installation
+### 6. SSL Installation
 
-This document will list on how to install LetsEncrypt SSL on Ubuntu Running Apache Web Server
+Secure Sockets Layer (SSL) is a standard security technology for establishing an encrypted link between a server and a client. Let’s Encrypt is a free, automated, and open certificate authority.
 
-PS : Please replace example.com with your valid domain name which is mapped with your server
+Faveo Requires HTTPS so the SSL is a must to work with the latest versions of faveo, so for the internal network and if there is no domain for free you can use the Self-Signed-SSL.
 
-We will install following dependencies in order to make LetsEncrypt SSL work:
+[Let’s Encrypt SSL installation documentation]()
 
-- certbot
+[Self Signed SSL Certificate Documentation]()
 
-### Downloading the LetsEncrypt client for Ubuntu
 
-```
-sudo apt install certbot
-```
-
-### Setting up the SSL certificate
-
-Certbot will handle the SSL certificate management quite easily, it will generate a new certificate for provided domain as a parameter.
-
-In this case, example.com will be used as the domain for which the certificate will be issued:
-
-```
-certbot certonly --webroot -w /usr/local/lsws/Example/html/faveo -d example.com
-```
-
-You will then be prompted to answer the following questions.
-
-- Enter Email address: Type in your email address
-- Accept the terms of service: A
-- Share your Email Address with EFF: Type Y for yes and N for No.
-- Enter Domain name: Type your FQDN (fully qualified domain name) here
-- Input the Web root: /usr/local/lsws/Example/html/faveo/
-
-Once you have answered all the questions and validation process is complete, the certificate files will be saved in /etc/letsencrypt/live/**example.com**/ directory
-
-**Output**
-
-```cpp
-Successfully received certificate.
-Certificate is saved at: /etc/letsencrypt/live/example.com/fullchain.pem
-Key is saved at:         /etc/letsencrypt/live/example.com/privkey.pem
-
-```
-
-Next, configure the WordPress site on your OpenLiteSpeed server to use the SSL certificate. Navigate to the Virtual Host configuration and open the SSL tab. Edit the SSL Private Key & Certificate.
-
-<img alt="Ubuntu" src="/Images/op-add-ssl-keys.png" />
-
-Type the fields as follows:
-
-```
-Private Key File: /etc/letsencrypt/live/<your-domain>/privkey.pem
-Certificate File: /etc/letsencrypt/live/<your-domain>/fullchain.pem
-Chained Certificate: Yes
-CA Certificate Path: /etc/letsencrypt/live/<your-domain>/fullchain.pem
-CA Certificate File: /etc/letsencrypt/live/<your-domain>/fullchain.pem
-```
-<img alt="Ubuntu" src="/Images/op-ssl-keys.png" />
-
-Once completed, go to Listeners and add a new listener.
-
-<img alt="Ubuntu" src="/Images/op-add-listener.png" />
-
-Fill in the fields as follows:
-
-```
-Listener Name: SSL
-IP Address: ANY
-Post: 443
-Binding:
-Enable REUSEPORT: Not Set
-Secure: Yes
-```
-
-Once all set, apply the new settings by clicking the save icon on the right.
-
-<img alt="Ubuntu" src="/Images/op-listener-enable-secure.png" />
-
-Next, view the SSL listener to configure the Virtual host mapping.
-
-<img alt="Ubuntu" src="/Images/op-ssl-listener.png" />
-
-Add a row in Virtual Host Mappings.
-
-<img alt="Ubuntu" src="/Images/op-add-virtual-host.png" />
-
-Choose the virtual host and type in your domain name. Save the settings from the save button on the top right corner.
-
-<img alt="Ubuntu" src="/Images/op-virtual-host-domains.png" />
-
-Once you’ve configured the SSL with your OpenLiteSpeed server, click the gracefully restart icon to apply the changes.
 
 
 <a id="s8" name="steps-7"></a>
@@ -543,7 +499,10 @@ Once you’ve configured the SSL with your OpenLiteSpeed server, click the grace
 Faveo requires some background processes to continuously run. Basically those crons are needed to receive emails To do this, setup a cron that runs every minute that triggers the following command php artisan schedule:run.Verify your php ececutable location and replace it accordingly in the below command.
 
 ```
-(sudo -u www-data crontab -l 2>/dev/null; echo "* * * * * /usr/bin/php /var/www/faveo/artisan schedule:run 2>&1") | sudo -u www-data crontab -
+(sudo -u nobody crontab -l 2>/dev/null; echo "* * * * * /usr/local/lsws/lsphp81/bin/lsphp /usr/local/lsws/Example/html/faveo/artisan schedule:run 2>&1") | sudo -u nobody crontab -
+```
+```
+sudo -u nobody crontab -l
 ```
 
 
@@ -554,7 +513,7 @@ Redis is an open-source (BSD licensed), in-memory data structure store, used as 
 
 This is an optional step and will improve system performance and is highly recommended.
 
-[Redis installation documentation](https://docs.faveohelpdesk.com/docs/installation/providers/enterprise/ubuntu-redis)
+[Redis installation documentation]()
 
 
 <a id="s10" name="steps-9"></a>
