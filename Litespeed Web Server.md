@@ -11,6 +11,8 @@ title: Installing Faveo Helpdesk on Ubuntu With Openlitespeed Web Server
 
 
 
+
+
 <img alt="Ubuntu" src="/Images/openlitespeed_logo_grey_bold.png" height="120" />
 
 Faveo can run on [Ubuntu 20.04 (Focal Fosa), Ubuntu 22.04 (Jammy Jellyfish)](http://releases.ubuntu.com/22.04/).
@@ -32,7 +34,7 @@ Faveo can run on [Ubuntu 20.04 (Focal Fosa), Ubuntu 22.04 (Jammy Jellyfish)](htt
 # Installation steps
 Faveo depends on the following:
 
-- <strong>Web Server</strong>  Openlitespeed
+- <strong>Web Server</strong>  Litespeed
 - <strong>PHP 8.1+</strong> with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip
 - <strong>MySQL 8.0+ or MariaDB 10.6+</strong>
 - <strong>SSL</strong> ,Trusted CA Signed or Slef-Signed SSL
