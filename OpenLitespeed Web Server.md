@@ -11,7 +11,7 @@ title: Installing Faveo Helpdesk on Ubuntu With Openlitespeed Web Server
 
 
 
-<img alt="Ubuntu" src="/Images/openlitespeed_logo_grey_bold.png" height="120" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/openlitespeed-images/openlitespeed_logo_grey_bold.png" height="120" />
 
 Faveo can run on [Ubuntu 20.04 (Focal Fosa), Ubuntu 22.04 (Jammy Jellyfish)](http://releases.ubuntu.com/22.04/).
 
@@ -148,7 +148,7 @@ http://server_domain_or_IP:8088
 ```
 Your browser will load the default OpenLiteSpeed web page, which will match the following image:
 
-<img alt="Ubuntu" src="/Images/op-8088.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-8088.png" />
 
 You can look around the example website to explore the features offered by the web server.
 
@@ -162,11 +162,11 @@ You will likely see a page warning you that the SSL certificate from the server 
 
 You will be prompted to enter the administrative username and password that you selected with the admpass.sh script in the previous step:
 
-<img alt="Ubuntu" src="/Images/op-7080.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-7080.png" />
 
 Once authenticated, you will be presented with the OpenLiteSpeed administration interface:
 
-<img alt="Ubuntu" src="/Images/op-admin-page.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-admin-page.png" />
 
 The majority of your configuration for the web server will take place via this dashboard.
 
@@ -179,28 +179,28 @@ Start by pressing **Listeners** in the list of options on side navigation bar. A
 
 From this list, click the magnifying glass, which is the **View** button, for the **Default listener**:
 
-<img alt="Ubuntu" src="/Images/op-default-listener.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-default-listener.png" />
 
 This action will load a page with more details about the **Default listener**. Click the edit button (the pen and paper symbol) in the top-right corner of the **Address Settings** table to modify its values:
 
-<img alt="Ubuntu" src="/Images/op-default-listener-2.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-default-listener-2.png" />
 
 This button will open a new screen. Change port <code>8088</code> to port <code>80</code>, then click the **Save** button (the floppy disk symbol):
 
-<img alt="Ubuntu" src="/Images/op-default-listener-3.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-default-listener-3.png" />
 
 Next, view the <code>Example</code> listener to configure the **Virtual host mapping**.
 
 
-<img alt="Ubuntu" src="/Images/op-listener-mapping.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-listener-mapping.png" />
 
 Choose the virtual host and type in your domain name. Save the settings from the save button on the top right corner.
 
-<img alt="Ubuntu" src="/Images/op-listener-mapping-domain.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-listener-mapping-domain.png" />
 
 After saving the modification, you will need to restart the server. Click the arrow icon for the Graceful Restart action that will restart OpenLiteSpeed:
 
-<img alt="Ubuntu" src="/Images/op-default-listener-4.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-default-listener-4.png" />
 
 If you are prompted to restart LiteSpeed, press the Go button.
 
@@ -339,6 +339,7 @@ Navigate to the virtual host root which is /usr/local/lsws/Example/html
 
 ```
 cd /usr/local/lsws/Example/html/
+mkdir faveo
 ```
 #### Extracting the Faveo-Codebase zip file
 
@@ -376,7 +377,7 @@ Via **http://your_server_ip:7080**, log in to the Admin Panel (using the credent
 
 You will see the following screen:
 
-<img alt="Ubuntu" src="/Images/op-external-app.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-external-app.png" />
 
 Here, you can configure your server to use any specific PHP processor. For this tutorial, we will use lsphp81.
 
@@ -385,12 +386,12 @@ Here, you can configure your server to use any specific PHP processor. For this 
 - Replace <code>uds://tmp/lshttpd/lsphp.sock</code> with <code>uds://tmp/lshttpd/lsphp81.sock</code>
 - Replace <code>lsphp74/bin/lsphp</code> with <code>$SERVER_ROOT/lsphp81/bin/lsphp</code>
 
-<img alt="Ubuntu" src="/Images/op-configure-php.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-configure-php.png" />
 
 Use the **Graceful Restart** button in the top right to restart the web server. The **Graceful Restart** button is highlighted in the upper right of the following screencapture:
 
 
-<img alt="Ubuntu" src="/Images/op-gracefull-restart.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-gracefull-restart.png" />
 
 Verify that your server is now using the specified PHP version by visiting the informational page at port <code>8088</code>:
 
@@ -420,33 +421,33 @@ max_execution_time = 360
 
 Moving next to configure the rewrite module which is an essential requirement for the WordPress features. Go to the Virtual Hosts and click on the view icon.
 
-<img alt="Ubuntu" src="/Images/op-edit-virtual-host.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-edit-virtual-host.png" />
 
 Click on the **General** tab and edit the *General options* with the edit icon at the top right corner.
 
-<img alt="Ubuntu" src="/Images/op-edit-virtual-host-general.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-edit-virtual-host-general.png" />
 
 In the **Document Root** field, type <code>$VH_ROOT/html/faveo</code>
 
 In the **Domain Name** field, type <code>example.com</code> and click the save button at the top right corner.
 
-<img alt="Ubuntu" src="/Images/op-virtual-host-general.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-virtual-host-general.png" />
 
 Then again on the **General** tab of *Virtual Hosts* configuration, click the edit icon next to the *Index Files* section.
 
-<img alt="Ubuntu" src="/Images/op-virtual-host-general-1.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-virtual-host-general-1.png" />
 
 In the **Index Files** field, add *index.php* at the beginning of the section. Then click the save button at the top right corner.
 
-<img alt="Ubuntu" src="/Images/op-virtual-host-index.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-virtual-host-index.png" />
 
 Next, go to the **Rewrite tab** of the *Virtual Hosts* configuration view and edit the *Rewrite Control* options.
 
-<img alt="Ubuntu" src="/Images/op-virtual-host-rewrites.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-virtual-host-rewrites.png" />
 
 Set **Enable Rewrite** and Auto Load from *.htaccess* to Yes and click the save icon at the top right corner.
 
-<img alt="Ubuntu" src="/Images/op-rewrite-control.png" />
+<img alt="Openlitespeed-Ubuntu" src="/Images/op-rewrite-control.png" />
 
 Once you’ve configured the OpenLiteSpeed server, Click the gracefully restart icon to apply the changes.
 
