@@ -312,7 +312,7 @@ http://server_domain_or_IP:8088
 ```
 Your browser will load the default LiteSpeed web page, which will match the following image:
 
-<img alt="Ubuntu" src="/Images/litespeed-images/ls-8088.png" />
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-80.png" />
 
 You can look around the example website to explore the features offered by the web server.
 
