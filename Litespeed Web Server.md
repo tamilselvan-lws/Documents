@@ -106,7 +106,162 @@ The installer will ask you a number of questions covered in detail [here](http:/
 
 Read the End User License Agreement and type "Yes" to confirm your agreement.
 
+```cpp
+Copyright (c) 2002-2003 Lite Speed Technologies Inc. All rights reserved.
 
+IMPORTANT: In order to continue installation you must agree with above 
+           license terms by typing "Yes" with capital "Y"! 
+
+Do you agree with above license? Yes
+
+```
+Press "Enter" to confirm default.
+
+```cpp
+Please specify the destination directory. You must have permissions to 
+create and manage the directory. It is recommended to install the web server 
+at /opt/lsws, /usr/local/lsws or in your home directory like '~/lsws'.
+
+ATTENTION: The user 'nobody' must be able to access the destination
+           directory.
+
+Destination [/usr/local/lsws]: 
+```
+
+Administrator's username and password for the WebAdmin interface.
+```cpp
+Please specify the user name of the administrator.
+This is the user name required to log into the administration web interface.
+
+User name [admin]: admin
+
+```
+```cpp
+Please specify the administrator's password.
+This is the password required to log into the administration web interface.
+
+Password: 
+Retype password: 
+```
+
+Please specify administrators' email addresses.
+
+```cpp
+
+It is recommended to specify a real email address,
+Multiple email addresses can be set by a comma 
+delimited list of email addresses. Whenever something
+abnormal happened, a notification will be sent to 
+emails listed here.
+
+Email addresses [root@localhost]: admin@demo.com
+
+```
+
+What control panel, if any, you will use with LSWS. Select <code>0</code>
+
+```cpp
+Will you use LiteSpeed Web Server with a hosting control panel?
+
+    0. NONE
+    1. cPanel
+    2. DirectAdmin
+    3. Plesk
+    4. Hsphere
+    5. Interworx
+    6. Lxadmin
+    7. ISPManager
+Please select (0-7) [0]? 0
+
+```
+
+Press "Enter" to skip default value.
+
+```cpp
+As you are the root user, you must choose the user and group
+whom the web server will be running as. For security reason, you should choose
+a non-system user who does not have login shell and home directory such as
+'nobody'.
+
+User [nobody]:    
+```
+```cpp
+User 'nobody' is the member of following group(s):  nogroup
+Group [nogroup]: 
+```
+
+TCP port for normal web service. Change <code>8088</code> to <code>80</code>.
+
+```cpp
+Please specify the port for normal HTTP service.
+Port 80 is the standard HTTP port, only 'root' user is allowed to use 
+port 80, if you have another web server running on port 80, you need to
+specify another port or stop the other web server before starting LiteSpeed
+Web Server.
+You can access the normal web page at http://<YOUR_HOST>:<HTTP_PORT>/
+
+HTTP port [8088]: 80
+```
+
+Press "Enter" to skip default value.
+
+```cpp
+Please specify the HTTP port for the administration web interface,
+which can be accessed through http://<YOUR_HOST>:<ADMIN_PORT>/
+
+Admin HTTP port [7080]: 
+```
+
+Whether to set up LiteSpeed PHP. 
+
+```cpp
+You can setup a global script handler for PHP with the pre-built PHP engine
+shipped with this package now. The PHP engine runs as Fast CGI which  
+outperforms Apache's mod_php. 
+You can always replace the pre-built PHP engine with your customized PHP 
+engine.
+
+Setup up PHP [Y/n]: Y
+Suffix for PHP script(comma separated list) [php]:
+```
+
+Enter <code>N</code> to skip installing Choot and AWStats Add-on
+
+```
+This installation script will try to setup the initial chroot environment 
+automatically.
+
+However, it is not easy to setup a chroot environment and you CGI program may
+break. So we do not recommend enabling it for the first time user.
+It can be enabled later by running this installation script again.
+
+Enable chroot [y/N]: N
+```
+```cpp
+AWStats Integration
+
+AWStats is a popular log analyzer that generates advanced web server 
+statistics. LiteSpeed web server seamlessly integrates AWStats into 
+its Web Admin Interface. AWStats configuration and statistics update
+have been taken care of by LiteSpeed web server.
+
+Note: If AWStats has been installed already, you do not need to
+      install again unless a new version of AWStats is available.
+
+Would you like to install AWStats Add-on module [y/N]? N
+```
+Enter <code>Y</code> to restart server 
+
+```cpp
+Would you like to have LiteSpeed Web Server started automatically
+when the server restarts [Y/n]? Y
+```
+
+```cpp
+[OK] The startup script has been successfully installed!
+Would you like to start it right now [Y/n]? Y
+```
+Root user can also choose to run LiteSpeed Web Server automatically at system startup as a service. Then you're done! The installer can start up the server.
 
 ### 1.d. Connecting to the Server
 
@@ -157,7 +312,7 @@ http://server_domain_or_IP:8088
 ```
 Your browser will load the default LiteSpeed web page, which will match the following image:
 
-<img alt="Ubuntu" src="/Images/op-8088.png" />
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-8088.png" />
 
 You can look around the example website to explore the features offered by the web server.
 
@@ -171,11 +326,11 @@ You will likely see a page warning you that the SSL certificate from the server 
 
 You will be prompted to enter the administrative username and password that you selected with the admpass.sh script in the previous step:
 
-<img alt="Ubuntu" src="/Images/op-7080.png" />
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-7080.png" />
 
 Once authenticated, you will be presented with the LiteSpeed administration interface:
 
-<img alt="Ubuntu" src="/Images/op-admin-page.png" />
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-admin-page.png" />
 
 The majority of your configuration for the web server will take place via this dashboard.
 
