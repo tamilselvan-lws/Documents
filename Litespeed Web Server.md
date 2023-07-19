@@ -1,19 +1,19 @@
 ---
 layout: single
 type: docs
-permalink: /docs/installation/providers/enterprise/openlitespeed-ubuntu/
+permalink: /docs/installation/providers/enterprise/litespeed-ubuntu/
 redirect_from:
   - /theme-setup/
-last_modified_at: 2023-07-14
+last_modified_at: 2023-07-19
 toc: true
-title: Installing Faveo Helpdesk on Ubuntu With Openlitespeed Web Server
+title: Installing Faveo Helpdesk on Ubuntu With litespeed Web Server
 ---
 
 
 
 
 
-<img alt="Ubuntu" src="/Images/openlitespeed_logo_grey_bold.png" height="120" />
+<img alt="Ubuntu" src="/Images/litespeed-images/litespeed-webserver-logo.png" height="120" />
 
 Faveo can run on [Ubuntu 20.04 (Focal Fosa), Ubuntu 22.04 (Jammy Jellyfish)](http://releases.ubuntu.com/22.04/).
 
@@ -34,18 +34,18 @@ Faveo can run on [Ubuntu 20.04 (Focal Fosa), Ubuntu 22.04 (Jammy Jellyfish)](htt
 # Installation steps
 Faveo depends on the following:
 
-- <strong>Web Server</strong>  Litespeed
+- <strong>Web Server</strong>  Litespeed 
 - <strong>PHP 8.1+</strong> with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip
 - <strong>MySQL 8.0+ or MariaDB 10.6+</strong>
 - <strong>SSL</strong> ,Trusted CA Signed or Slef-Signed SSL
 
 
 <a id="s2" name="steps-1"></a>
-### 1. LOMP Installation
+### 1. LLMP Installation
 
-The LOMP stack is an acronym for Linux, OpenLiteSpeed, MariaDB, and PHP. OpenLiteSpeed is the open-source option for LiteSpeed web servers. 
+The LLMP stack is an acronym for Linux, LiteSpeed, MariaDB, and PHP. 
 
-In this tutorial, you will set up a LOMP server running on Ubuntu 22.04. At the time of writing, the current versions are PHP 8.1, MariaDB 10.6, and OpenLiteSpeed 1.7.
+In this tutorial, you will set up a LLMP server running on Ubuntu 22.04. At the time of writing, the current versions are PHP 8.1, MariaDB 10.6, and LiteSpeed 6.0.6.
 
 Run the following commands as sudoers or Login as root user by typing the command below
 
@@ -57,55 +57,62 @@ sudo su
 ```
 apt update && apt upgrade -y
 ```
+### 1.b.  Installing LiteSpeed
 
-### 1.b.  Installing OpenLiteSpeed With LSPHP 8.1
+#### Production license:
+- Licenses can be leased or purchased at the [LiteSpeed store](https://store.litespeedtech.com/store/cart.php).
 
-OpenLiteSpeed hosts its code on its own repository. Add this repository to the apt package manager’s sources list with the following command:
+- A serial number will be sent to you in the confirmation email after you order has been successfully processed. Each serial number allows for one server installation.
+Save the serial number as "serial.no"; in the installation directory (where install.sh is located). 
 
-```
-sudo wget -O - https://repo.litespeed.sh | sudo bash
-```
+- The LiteSpeed products registration server will use this file to retrieve your license key during the installation process.
 
+#### Download
 
+Download the LiteSpeed Web Server tarball from the [LiteSpeed Technologies website](http://www.litespeedtech.com/download/litespeed-web-server-download?_gl=1*u0zddr*_gcl_au*MTkxMTg0MjY4OS4xNjg5NjA5ODM1).
 
-Update the list of repositories to ensure that the newly added repository is scanned by the apt package manager:
-
-```
-sudo apt update
-```
-Next, install the openlitespeed package:
+Run the following commands from SSH as root:
 
 ```
-sudo apt install openlitespeed lsphp81 lsphp81-curl lsphp81-imap lsphp81-mysql lsphp81-ldap lsphp81-redis lsphp81-ioncube 
+cd /root
+wget http://www.litespeedtech.com/packages/6.0/lsws-6.0.6-ent-x86_64-linux.tar.gz
 ```
-If prompted, enter your password, then confirm the installation with Y.
-
-
-This command installs the Openlitespeed server package and LSPHP 8.1. [LiteSpeed PHP (LSPHP)](https://docs.litespeedtech.com/lsws/extapp/php/configuration/options/) is a PHP interpreter integrated with the [LiteSpeed Server Application Programming Interface (LSAPI)](https://www.litespeedtech.com/open-source/litespeed-sapi/php).
-
-Now that the OpenLiteSpeed server is installed, you will secure it by updating the default administrator account.
-
-### 1.c. Setting the Administrative Password
-
-Before testing the server, you will set a new administrative password for OpenLiteSpeed. You can do this by running a script provided by OpenLiteSpeed:
+#### Unpack
+Use the following command to unpack the tarball:
 
 ```
-sudo /usr/local/lsws/admin/misc/admpass.sh
+tar zxfv  lsws-6.0.6-ent-x86_64-linux.tar.gz
 ```
 
-You will be asked to provide a username for the administrative user. If you press ENTER without choosing a new username, the default username admin will be used. You can use whatever administrative username you prefer. Then you will be prompted to create and confirm a new password for the account. Put in the administrative password you prefer, then press ENTER again. The script will confirm a successful update:
+#### Run Installation Script
+Access the unpacked folder:
 
-**Output**
 ```
-Administrator's username/password is updated successfully!
+cd lsws-6.0.6
 ```
-You have now secured the admin account. Next, you will test the server to ensure it’s running properly.
+Create a serial.no file containing your paid license serial number or your trial key:
+
+```
+echo "YOUR_SERIAL_NO" > serial.no
+```
+Replace YOUR_SERIAL_NO with your actual license serial number or trial key. (Double quotes are optional in this context.)
+
+Run the install script:
+
+```
+./install.sh
+```
+The installer will ask you a number of questions covered in detail [here](http://www.litespeedtech.com/docs/webserver/install?_gl=1*1k1862b*_gcl_au*MTkxMTg0MjY4OS4xNjg5NjA5ODM1).
+
+Read the End User License Agreement and type "Yes" to confirm your agreement.
+
+
 
 ### 1.d. Connecting to the Server
 
 In this step, you will connect to your server.
 
-OpenLiteSpeed should have started automatically after it was installed. You can verify if it started with the <code>systemctl status</code> command:
+LiteSpeed should have started automatically after it was installed. You can verify if it started with the <code>systemctl status</code> command:
 
 ```
 sudo systemctl status lsws
@@ -115,17 +122,17 @@ You will receive the following output:
 
 **Output**
 ```cpp
-● lshttpd.service - OpenLiteSpeed HTTP Server
+● lshttpd.service - LiteSpeed HTTP Server
      Loaded: loaded (/etc/systemd/system/lshttpd.service; enabled; vendor preset: enabled)
      Active: active (running) since Wed 2022-03-16 08:59:09 UTC; 2min 26s ago
     Process: 32997 ExecStart=/usr/local/lsws/bin/lswsctrl start (code=exited, status=0/SUCCESS)
    Main PID: 33035 (litespeed)
      CGroup: /system.slice/lshttpd.service
-             ├─33035 openlitespeed (lshttpd - main)
-             ├─33044 openlitespeed (lscgid)
-             └─33073 openlitespeed (lshttpd - #01)
+             ├─33035 litespeed (lshttpd - main)
+             ├─33044 litespeed (lscgid)
+             └─33073 litespeed (lshttpd - #01)
 ```
-The active (running) message indicates that OpenLiteSpeed is running.
+The active (running) message indicates that LiteSpeed is running.
 
 The server should now be running. Press <code>CTRL+C</code> to exit the service output.
 
@@ -143,12 +150,12 @@ Before visiting it in your browser, you will need to open some ports on your fir
 sudo ufw allow 8088,7080,443,80/tcp
 ```
 
-The first port, 8088, is the default port for OpenLiteSpeed’s example site. After allowing it with ufw, it should now be accessible to the public. In your web browser, navigate to your server’s IP address or domain name, followed by :8088 to specify the port:
+The first port, 8088, is the default port for LiteSpeed’s example site. After allowing it with ufw, it should now be accessible to the public. In your web browser, navigate to your server’s IP address or domain name, followed by :8088 to specify the port:
 
 ```
 http://server_domain_or_IP:8088
 ```
-Your browser will load the default OpenLiteSpeed web page, which will match the following image:
+Your browser will load the default LiteSpeed web page, which will match the following image:
 
 <img alt="Ubuntu" src="/Images/op-8088.png" />
 
@@ -166,7 +173,7 @@ You will be prompted to enter the administrative username and password that you 
 
 <img alt="Ubuntu" src="/Images/op-7080.png" />
 
-Once authenticated, you will be presented with the OpenLiteSpeed administration interface:
+Once authenticated, you will be presented with the LiteSpeed administration interface:
 
 <img alt="Ubuntu" src="/Images/op-admin-page.png" />
 
@@ -200,7 +207,7 @@ Choose the virtual host and type in your domain name. Save the settings from the
 
 <img alt="Ubuntu" src="/Images/op-listener-mapping-domain.png" />
 
-After saving the modification, you will need to restart the server. Click the arrow icon for the Graceful Restart action that will restart OpenLiteSpeed:
+After saving the modification, you will need to restart the server. Click the arrow icon for the Graceful Restart action that will restart litespeed:
 
 <img alt="Ubuntu" src="/Images/op-default-listener-4.png" />
 
@@ -450,7 +457,7 @@ Set **Enable Rewrite** and Auto Load from *.htaccess* to Yes and click the save 
 
 <img alt="Ubuntu" src="/Images/op-rewrite-control.png" />
 
-Once you’ve configured the OpenLiteSpeed server, Click the gracefully restart icon to apply the changes.
+Once you’ve configured the litespeed server, Click the gracefully restart icon to apply the changes.
 
 
 
