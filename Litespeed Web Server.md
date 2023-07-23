@@ -335,42 +335,6 @@ Once authenticated, you will be presented with the LiteSpeed administration inte
 The majority of your configuration for the web server will take place via this dashboard.
 
 
-
-### 1.e. Changing the Port for the Default Page
-To demonstrate how to configure options through the web interface, you will change the port that the default site uses from <code>8088</code> to the conventional HTTP port (<code>80</code>).
-
-Start by pressing **Listeners** in the list of options on side navigation bar. A list of all available listeners will load.
-
-From this list, click the magnifying glass, which is the **View** button, for the **Default listener**:
-
-<img alt="Ubuntu" src="/Images/op-default-listener.png" />
-
-This action will load a page with more details about the **Default listener**. Click the edit button (the pen and paper symbol) in the top-right corner of the **Address Settings** table to modify its values:
-
-<img alt="Ubuntu" src="/Images/op-default-listener-2.png" />
-
-This button will open a new screen. Change port <code>8088</code> to port <code>80</code>, then click the **Save** button (the floppy disk symbol):
-
-<img alt="Ubuntu" src="/Images/op-default-listener-3.png" />
-
-Next, view the <code>Example</code> listener to configure the **Virtual host mapping**.
-
-
-<img alt="Ubuntu" src="/Images/op-listener-mapping.png" />
-
-Choose the virtual host and type in your domain name. Save the settings from the save button on the top right corner.
-
-<img alt="Ubuntu" src="/Images/op-listener-mapping-domain.png" />
-
-After saving the modification, you will need to restart the server. Click the arrow icon for the Graceful Restart action that will restart litespeed:
-
-<img alt="Ubuntu" src="/Images/op-default-listener-4.png" />
-
-If you are prompted to restart LiteSpeed, press the Go button.
-
-The default web page should now be accessible in your browser on port <code>80</code> instead of port <code>8088</code>. Visiting your server’s domain name or IP address without providing a port number will now display the site.
-
-
 <a id="s3" name="steps-2"></a>
 ### 2. Install some Utility packages
 
@@ -502,7 +466,7 @@ Please download Faveo Helpdesk from [https://billing.faveohelpdesk.com](https://
 Navigate to the virtual host root which is /usr/local/lsws/Example/html
 
 ```
-cd /usr/local/lsws/Example/html/
+cd /usr/local/lsws/DEFAULT/html
 ```
 #### Extracting the Faveo-Codebase zip file
 
@@ -514,7 +478,7 @@ unzip "faveo.zip" -d faveo
 You may install Faveo by simply cloning the repository. In order for this to work with Apache, you need to clone the repository in a specific folder:
 
 ```
-cd /usr/local/lsws/Example/html/
+cd /usr/local/lsws/DEFAULT/html
 git clone https://github.com/ladybirdweb/faveo-helpdesk.git faveo
 ```
 
