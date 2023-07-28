@@ -1,9 +1,8 @@
-## Web Server
+## Supported Web Server
 - Litespeed Web Server 
 - OpenLitespeed Web Server
 
 ## Main 
-
 #### Users
 - Profile
 - User (Create List, Modify, Delete)
@@ -64,7 +63,7 @@
 
 ## Server 
 
-#### Root File Manager and Containerization(Paid)
+#### Root File Manager and Containerization(ADDON)
 
 #### CloudLinux
 - Package (Create, List)
