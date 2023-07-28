@@ -498,7 +498,33 @@ find . -type d -exec chmod 755 {} \;
 <a id="s5" name="steps-4"></a>
 ### 4. Configure Litespeed webserver
 
-### 4.a. Configuring LSPHP 8.1
+### 4.a. LSPHP 8.1+ 
+
+LiteSpeed hosts its code on its own repository. Add this repository to the apt package manager’s sources list with the following command:
+
+```
+sudo wget -O - https://repo.litespeed.sh | sudo bash
+```
+
+Update the list of repositories to ensure that the newly added repository is scanned by the apt package manager:
+
+```
+sudo apt update
+```
+
+Next, install the openlitespeed package:
+
+```
+sudo apt install lsphp81 lsphp81-curl lsphp81-imap lsphp81-mysql lsphp81-ldap lsphp81-redis lsphp81-ioncube 
+```
+
+
+
+
+
+
+
+Configuring LSPHP 8.1
 
 Via **http://your_server_ip:7080**, log in to the Admin Panel (using the credentials you just set up) and navigate to the Server Configuration section. Then, click the External App tab.
 
