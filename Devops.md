@@ -13,14 +13,11 @@
 
 ## 2. Operating system
 
-- Windows 
-- Linux
-
-[Linux Administration Bootcamp: Go from Beginner to Advanced](https://www.udemy.com/course/linux-administration-bootcamp/)
+- [Linux Administration Bootcamp: Go from Beginner to Advanced](https://www.udemy.com/course/linux-administration-bootcamp/)
 
 
 
-[Learn Linux in 5 Days and Level Up Your Career](ttps://www.udemy.com/course/learn-linux-in-5-days/)
+- [Learn Linux in 5 Days and Level Up Your Career](https://www.udemy.com/course/learn-linux-in-5-days/)
 
 ## 3. Live in terminal
 
@@ -31,7 +28,7 @@
 
 ### 3.a Bash Script
 
-[Bash Shell Scripting: Crash Course For Beginners](https://www.udemy.com/course/bash-shell-scripting-crash-course-for-beginners/)
+- [Bash Shell Scripting: Crash Course For Beginners](https://www.udemy.com/course/bash-shell-scripting-crash-course-for-beginners/)
 
 ## Version Control Systems
 
