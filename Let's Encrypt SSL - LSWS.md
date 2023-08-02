@@ -1,5 +1,5 @@
 
-<img alt="Ubuntu" src="/Images/litespeed_logo_grey_bold.png" height="120" />
+<img alt="Ubuntu" src="/Images/litespeed-images/litespeed-webserver-logo.png" height="120" />
 
 ## Introduction
 

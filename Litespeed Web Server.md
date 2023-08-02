@@ -695,7 +695,7 @@ Secure Sockets Layer (SSL) is a standard security technology for establishing an
 
 Faveo Requires HTTPS so the SSL is a must to work with the latest versions of faveo, so for the internal network and if there is no domain for free you can use the Self-Signed-SSL.
 
-[Let’s Encrypt SSL installation documentation](https://github.com/tamilselvan-lws/Documents/blob/main/Let's%20Encrypt%20SSL.md)
+[Let’s Encrypt SSL installation documentation](https://github.com/tamilselvan-lws/Documents/blob/main/Let's%20Encrypt%20SSL%20-%20LSWS.md)
 
 
 

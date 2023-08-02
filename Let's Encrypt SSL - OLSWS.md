@@ -1,5 +1,5 @@
 
-<img alt="Ubuntu" src="/Images/openlitespeed_logo_grey_bold.png" height="120" />
+<img alt="Ubuntu" src="/Images/openlitespeed-images/openlitespeed_logo_grey_bold.png" height="120" />
 
 ## Introduction
 
