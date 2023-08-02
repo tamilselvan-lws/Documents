@@ -534,10 +534,25 @@ You will see the following screen:
 
 Here, you can configure your server to use any specific PHP processor. For this tutorial, we will use lsphp81.
 
-
-- Replace <code>lsphp</code> with <code>lsphp81</code>
-- Replace <code>uds://tmp/lshttpd/lsphp.sock</code> with <code>uds://tmp/lshttpd/lsphp81.sock</code>
-- Replace <code>lsphp74/bin/lsphp</code> with <code>$SERVER_ROOT/lsphp81/bin/lsphp</code>
+- Name: <code>lsphp81</code>
+- Address: <code>uds://tmp/lshttpd/lsphp80.sock</code>
+- Max Connections: <code>35</code>
+- Environment: <code>PHP_LSAPI_MAX_REQUESTS=50 
+                     PHP_LSAPI_CHILDREN=35 
+                     LSAPI_AVOID_FORK=200M</code>
+- Initial Request Timeout (secs): <code>60</code>
+- Retry Timeout : <code>0</code>
+- Persistent Connection: <code>Yes</code>
+- DEFAULT Response Buffering: <code>no</code>
+- DEFAULT Start By Server: <code>Yes(Through CGI Daemon)</code>
+- Command: <code>$SERVER_ROOT/lsphp81/bin/lsphp</code>
+- Back Log: <code>100</code>
+- Instances: <code>1</code>
+- Priority: <code>0</code>
+- Memory Soft Limit (bytes): <code>2047M</code>
+- Memory Hard Limit (bytes): <code>2048M</code>
+- Process Soft Limit: <code>1400</code>
+- Process Hard Limit: <code>1500</code>
 
 <img alt="Ubuntu" src="/Images/litespeed-images/ls-server-external-new-add.png" />
 
