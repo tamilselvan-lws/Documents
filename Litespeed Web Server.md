@@ -512,7 +512,7 @@ Update the list of repositories to ensure that the newly added repository is sca
 sudo apt update
 ```
 
-Next, install the openlitespeed package:
+Next, install the litespeed package:
 
 ```
 sudo apt install lsphp81 lsphp81-curl lsphp81-imap lsphp81-mysql lsphp81-ldap lsphp81-redis lsphp81-ioncube 
