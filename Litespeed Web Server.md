@@ -221,8 +221,7 @@ outperforms Apache's mod_php.
 You can always replace the pre-built PHP engine with your customized PHP 
 engine.
 
-Setup up PHP [Y/n]: Y
-Suffix for PHP script(comma separated list) [php]:
+Setup up PHP [Y/n]: N
 ```
 
 Enter <code>N</code> to skip installing Choot and AWStats Add-on
