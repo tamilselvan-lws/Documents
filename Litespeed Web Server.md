@@ -530,7 +530,7 @@ Via **http://your_server_ip:7080**, log in to the Admin Panel (using the credent
 
 You will see the following screen:
 
-<img alt="Ubuntu" src="/Images/op-external-app.png" />
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-server-external-new.png" />
 
 Here, you can configure your server to use any specific PHP processor. For this tutorial, we will use lsphp81.
 
@@ -539,7 +539,7 @@ Here, you can configure your server to use any specific PHP processor. For this 
 - Replace <code>uds://tmp/lshttpd/lsphp.sock</code> with <code>uds://tmp/lshttpd/lsphp81.sock</code>
 - Replace <code>lsphp74/bin/lsphp</code> with <code>$SERVER_ROOT/lsphp81/bin/lsphp</code>
 
-<img alt="Ubuntu" src="/Images/op-configure-php.png" />
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-server-external-new-add.png" />
 
 Use the **Graceful Restart** button in the top right to restart the web server. The **Graceful Restart** button is highlighted in the upper right of the following screencapture:
 
