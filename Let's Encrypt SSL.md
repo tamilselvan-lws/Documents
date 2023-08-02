@@ -120,32 +120,7 @@ sudo ufw status verbose
 
 ### Setting up auto renewal of the certificate
 
-For a list of certificates installed on your server:
-
-```
-sudo certbot certificates
-```
-sudo certbot renew will renew all certs installed on the server. You can run the command with the --dry-run
-flag simulate the renewal, having --dry-run will not renew the certs.
-
-```
-sudo certbot renew --dry-run
-```
-
-Another flag we will use is the --force-renewal, which we will make use of to force the renewals on a particular
-date.
-
-```
-sudo certbot renew --force-renewal
-```
-
-Reload LSWS after renewing your certs
-
-```
-sudo /usr/local/lsws/bin/lswsctrl reload
-```
-
-### CRON COMMANDS
+#### CRON COMMANDS
 
 ```
 sudo crontab -l
