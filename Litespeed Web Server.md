@@ -528,6 +528,8 @@ Configuring LSPHP 8.1
 
 Via **http://your_server_ip:7080**, log in to the Admin Panel (using the credentials you just set up) and navigate to the Server Configuration section. Then, click the External App tab.
 
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-server-external.png" />
+
 You will see the following screen:
 
 <img alt="Ubuntu" src="/Images/litespeed-images/ls-server-external-new.png" />
@@ -556,12 +558,20 @@ Here, you can configure your server to use any specific PHP processor. For this 
 
 <img alt="Ubuntu" src="/Images/litespeed-images/ls-server-external-new-add.png" />
 
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-server-scripthandler.png" />
+
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-server-scripthandler-edit.png" />
+
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-server-php-globalconfig.png" />
+
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-server-php-handler.png" />
+
+
+
 Use the **Graceful Restart** button in the top right to restart the web server. The **Graceful Restart** button is highlighted in the upper right of the following screencapture:
 
 
-<img alt="Ubuntu" src="/Images/op-gracefull-restart.png" />
-
-Verify that your server is now using the specified PHP version by visiting the informational page at port <code>8088</code>:
+Verify that your server is now using the specified PHP version by visiting the informational page at port <code>80</code>:
 
 ```
 http://your_server_ip/phpinfo.php
