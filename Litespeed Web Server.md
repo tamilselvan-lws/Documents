@@ -612,47 +612,31 @@ post_max_size = 100M
 max_execution_time = 360
 ```
 
-Opcache Settings 
-
-```
-opcache.enable=1
-opcache.memory_consumption=192
-opcache.interned_strings_buffer=16
-opcache.max_accelerated_files=16229
-opcache.validate_timestamps=0
-```
-
 ### 4.b Setting Up a Virtual Host
 
 Moving next to configure the rewrite module which is an essential requirement for the WordPress features. Go to the Virtual Hosts and click on the view icon.
 
-<img alt="Ubuntu" src="/Images/op-edit-virtual-host.png" />
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-virtualhost-view.png" />
 
 Click on the **General** tab and edit the *General options* with the edit icon at the top right corner.
 
-<img alt="Ubuntu" src="/Images/op-edit-virtual-host-general.png" />
-
 In the **Document Root** field, type <code>$VH_ROOT/html/faveo</code>
 
-In the **Domain Name** field, type <code>example.com</code> and click the save button at the top right corner.
-
-<img alt="Ubuntu" src="/Images/op-virtual-host-general.png" />
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-virtualhost-general.png" />
 
 Then again on the **General** tab of *Virtual Hosts* configuration, click the edit icon next to the *Index Files* section.
 
-<img alt="Ubuntu" src="/Images/op-virtual-host-general-1.png" />
-
 In the **Index Files** field, add *index.php* at the beginning of the section. Then click the save button at the top right corner.
 
-<img alt="Ubuntu" src="/Images/op-virtual-host-index.png" />
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-virtualhost-general-index.png" />
+
 
 Next, go to the **Rewrite tab** of the *Virtual Hosts* configuration view and edit the *Rewrite Control* options.
 
-<img alt="Ubuntu" src="/Images/op-virtual-host-rewrites.png" />
-
 Set **Enable Rewrite** and Auto Load from *.htaccess* to Yes and click the save icon at the top right corner.
 
-<img alt="Ubuntu" src="/Images/op-rewrite-control.png" />
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-virtualhost-rewrite.png" />
+
 
 Once you’ve configured the litespeed server, Click the gracefully restart icon to apply the changes.
 
