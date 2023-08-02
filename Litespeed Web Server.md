@@ -558,11 +558,28 @@ Here, you can configure your server to use any specific PHP processor. For this 
 
 <img alt="Ubuntu" src="/Images/litespeed-images/ls-server-external-new-add.png" />
 
+navigate to the Server Configuration section. Then, click the Script Handler tab.
+
 <img alt="Ubuntu" src="/Images/litespeed-images/ls-server-scripthandler.png" />
+
+- Suffixes: <code>php81</code>
+- Handler Type: <code>Litespedd SAPI</code>
+- Handler Name: <code>[Server Level]: lsphp81</code>
 
 <img alt="Ubuntu" src="/Images/litespeed-images/ls-server-scripthandler-edit.png" />
 
+Then, click the PHP tab. Edit PHP Global Configuration.
+
+- Detached Mode: <code>Yes</code>
+- Control Panel: <code>Litespedd Native</code>
+
 <img alt="Ubuntu" src="/Images/litespeed-images/ls-server-php-globalconfig.png" />
+
+Then, Edit PHP Handler Definition.
+
+- Handler ID: <code>php81</code>
+- Command: <code>$SERVER_ROOT/lsphp81/bin/lsphp</code>
+- Handler Suffixes: <code>php</code>
 
 <img alt="Ubuntu" src="/Images/litespeed-images/ls-server-php-handler.png" />
 
