@@ -631,11 +631,23 @@ In the **Index Files** field, add *index.php* at the beginning of the section. T
 <img alt="Ubuntu" src="/Images/litespeed-images/ls-virtualhost-general-index.png" />
 
 
+Then again on the General tab of Virtual Hosts configuration, click the edit icon next to the **ht access** section.
+
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-virtualhost-htaccess.png" />
+
+Next, go to the **Script Handler tab** of the *Virtual Hosts* configuration view and edit the *Script Handler Definition* options.
+
+<img alt="Ubuntu" src="/Images/litespeed-images/ls-virtualhost-scripthandler.png" />
+
 Next, go to the **Rewrite tab** of the *Virtual Hosts* configuration view and edit the *Rewrite Control* options.
 
 Set **Enable Rewrite** and Auto Load from *.htaccess* to Yes and click the save icon at the top right corner.
 
+
 <img alt="Ubuntu" src="/Images/litespeed-images/ls-virtualhost-rewrite.png" />
+
+
+
 
 
 Once you’ve configured the litespeed server, Click the gracefully restart icon to apply the changes.
