@@ -38,6 +38,8 @@ apt-get install supervisor
 nano /etc/supervisor/conf.d/faveo-worker.conf
 ```
 
+## Openlitespeed Web Server
+
 ```cpp
 [program:faveo-Horizon]
 process_name=%(program_name)s
@@ -48,6 +50,20 @@ user=www-data
 redirect_stderr=true
 stdout_logfile=/usr/local/lsws/Example/html/faveo/storage/logs/horizon-worker.log
 ```
+
+## litespeed Web Server 
+
+```cpp
+[program:faveo-Horizon]
+process_name=%(program_name)s
+command=php /usr/local/lsws/DEFAULT/html/faveo/artisan horizon
+autostart=true
+autorestart=true
+user=www-data
+redirect_stderr=true
+stdout_logfile=/usr/local/lsws/DEFAULT/html/faveo/storage/logs/horizon-worker.log
+```
+
 
 ### Restart the Supervisor to reread the new configuration.Permalink
 ```

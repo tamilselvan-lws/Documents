@@ -550,7 +550,7 @@ Use the **Graceful Restart** button in the top right to restart the web server. 
 Verify that your server is now using the specified PHP version by visiting the informational page at port <code>8088</code>:
 
 ```
-http://your_server_ip:8088/phpinfo.php
+http://your_server_ip/phpinfo.php
 ```
 
 After installing LSPHP 8.1, run the commands below to open PHP default config file.
