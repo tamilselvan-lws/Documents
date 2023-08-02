@@ -305,10 +305,10 @@ Before visiting it in your browser, you will need to open some ports on your fir
 sudo ufw allow 8088,7080,443,80/tcp
 ```
 
-The first port, 8088, is the default port for LiteSpeed’s example site. After allowing it with ufw, it should now be accessible to the public. In your web browser, navigate to your server’s IP address or domain name, followed by :8088 to specify the port:
+The first port, 80, is the default port for LiteSpeed’s example site. After allowing it with ufw, it should now be accessible to the public. In your web browser, navigate to your server’s IP address or domain name, followed by :8088 to specify the port:
 
 ```
-http://server_domain_or_IP:8088
+http://server_domain_or_IP
 ```
 Your browser will load the default LiteSpeed web page, which will match the following image:
 
@@ -467,6 +467,7 @@ Navigate to the virtual host root which is /usr/local/lsws/Example/html
 
 ```
 cd /usr/local/lsws/DEFAULT/html
+mkdir faveo
 ```
 #### Extracting the Faveo-Codebase zip file
 
