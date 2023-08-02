@@ -612,6 +612,16 @@ post_max_size = 100M
 max_execution_time = 360
 ```
 
+Opcache Settings 
+
+```
+opcache.enable=1
+opcache.memory_consumption=192
+opcache.interned_strings_buffer=16
+opcache.max_accelerated_files=16229
+opcache.validate_timestamps=0
+```
+
 ### 4.b Setting Up a Virtual Host
 
 Moving next to configure the rewrite module which is an essential requirement for the WordPress features. Go to the Virtual Hosts and click on the view icon.
