@@ -5,7 +5,9 @@
 
 ## Install WinSW Service
 
-[Click Here](https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/Redis%20Windows%20Server/WinSW.zip) to download WinSW Config File.
+Download WinSW Config File.
+- [IIS](https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/Redis%20Windows%20Server/Files/WinSW-IIS.zip) 
+- [Apache](https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/Redis%20Windows%20Server/Files/WinSW-Apache.zip)
 
 Unzip the <code>WinSW.zip</code> file, a folder <code>nssm-2.24</code> with nssm files will be created.
 
@@ -27,6 +29,7 @@ Go to Command Prompt by typing the following Image.
 
 <img alt="Windows-Server" src="/Redis Windows Server/images/3.png"/>
 
+### Command
 ```
 winsw install
 winsw start
