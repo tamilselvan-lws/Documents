@@ -5,7 +5,7 @@
 
 ## Install WinSW Service
 
-[Click Here]() to download WinSW Config File.
+[Click Here](https://github.com/tamilselvan-lws/Documents/blob/main/Redis%20Windows%20Server/WinSW.zip) to download WinSW Config File.
 
 Unzip the nssm-2.24 zip file, a folder nssm-2.24 with nssm files will be created.
 
