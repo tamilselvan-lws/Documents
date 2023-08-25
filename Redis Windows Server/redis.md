@@ -74,7 +74,7 @@ Unzip the <code>WinSW-{version}.zip</code> file.
 
 Go inside the folder & copy the WinSW folder & paste it in C:\ .
 
-<img src="/Redis Windows Server/images/Redis-dir.png" style=" width:400px ; height:250px ">
+<img src="/Redis Windows Server/images/Redis-dir.png" style=" width:400px">
 
 <b>4. General Instructions to Create WinSW Services</b>
 
@@ -204,4 +204,4 @@ winsw start
 
 Open service manager and status all the services configured by WinSW.
 
-<img src="/Redis Windows Server/images/Redis-Status.png" style=" width:400px ; height:250px ">
+<img src="/Redis Windows Server/images/Redis-Status.png" style=" width:400px">
