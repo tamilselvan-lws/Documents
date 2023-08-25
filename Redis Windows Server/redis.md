@@ -103,13 +103,13 @@ Navigate to the directory containing the WinSW executable and your application f
 ```
 cd C:\WinSW\Faveo-Mail-Worker
 ```
-- Install your application as a service using the following command:
+Install your application as a service using the following command:
 
 ```
 winsw install
 ```
 
-- Start the service:
+Start the service:
 
 ```
 winsw start
@@ -125,13 +125,13 @@ Navigate to the directory containing the WinSW executable and your application f
 ```
 cd C:\WinSW\Faveo-Recurring
 ```
-- Install your application as a service using the following command:
+Install your application as a service using the following command:
 
 ```
 winsw install
 ```
 
-- Start the service:
+Start the service:
 
 ```
 winsw start
@@ -146,13 +146,13 @@ Navigate to the directory containing the WinSW executable and your application f
 ```
 cd C:\WinSW\Faveo-Reports
 ```
-- Install your application as a service using the following command:
+Install your application as a service using the following command:
 
 ```
 winsw install
 ```
 
-- Start the service:
+Start the service:
 
 ```
 winsw start
@@ -168,13 +168,13 @@ Navigate to the directory containing the WinSW executable and your application f
 ```
 cd C:\WinSW\Faveo-Notifications
 ```
-- Install your application as a service using the following command:
+Install your application as a service using the following command:
 
 ```
 winsw install
 ```
 
-- Start the service:
+Start the service:
 
 ```
 winsw start
@@ -190,14 +190,18 @@ Navigate to the directory containing the WinSW executable and your application f
 ```
 cd C:\WinSW\Faveo-Deactivation
 ```
-- Install your application as a service using the following command:
+Install your application as a service using the following command:
 
 ```
 winsw install
 ```
 
-- Start the service:
+Start the service:
 
 ```
 winsw start
 ```
+
+Open service manager and status all the services configured by WinSW.
+
+<img src="/Redis Windows Server/images/Redis-Status.png" style=" width:400px ; height:250px ">
