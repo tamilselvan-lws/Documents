@@ -9,7 +9,7 @@ Download WinSW Config File.
 - [IIS](https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/Redis%20Windows%20Server/Files/WinSW-IIS.zip) 
 - [Apache](https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/Redis%20Windows%20Server/Files/WinSW-Apache.zip)
 
-Unzip the <code>WinSW.zip</code> file, a folder <code>nssm-2.24</code> with nssm files will be created.
+Unzip the <code>WinSW.zip</code> file, a folder <code>WinSW</code> with nssm files will be created.
 
 Go inside the folder & copy the nssm-2.24 folder & paste it in <code>C:\WinSW.</code>
 
