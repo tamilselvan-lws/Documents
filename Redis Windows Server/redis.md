@@ -4,8 +4,8 @@ type: docs
 permalink: /docs/installation/providers/enterprise/redis-windows/
 redirect_from:
   - /theme-setup/
-last_modified_at: 2022-11-09
-last_modified_by: Mohammad_Asif
+last_modified_at: 2023-08-25
+last_modified_by: TamilSelvan_M
 toc: true
 title: Installing Redis on Windows Server
 ---
