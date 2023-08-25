@@ -83,16 +83,13 @@ Go inside the folder & copy the WinSW folder & paste it in C:\ .
 Go to Command Prompt and configure WinSW-SERVICE by typing the following commands. (Faveo-Mail-Worker, Faveo-Recurring, Faveo-Reports & Faveo-Notifications are to be configured in actual).
 
 
-- Type the below command in Command Prompt, this will open a new window.
+- Install your application as a service using the following command:
 
 ```
 winsw install
-winsw start
-winsw status
 ```
-**Follow the above general steps to create WinSW Services for FAVEO MAIL WORKER, FAVEO RECURRING, FAVEO REPORTS & FAVEO NOTIFICATIONS**
 
-The details to be filled for Faveo Mail Worker, Faveo Recurring, Faveo Reports  & Faveo Notifications are summarised below:
+**Follow the above general steps to create WinSW Services for FAVEO MAIL WORKER, FAVEO RECURRING, FAVEO REPORTS & FAVEO NOTIFICATIONS**
 
 - **FAVEO WORKER**
 
