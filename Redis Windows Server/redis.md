@@ -202,6 +202,6 @@ Start the service:
 winsw start
 ```
 
-Open service manager and status all the services configured by WinSW.
+Open service manager and check status of all the services configured by WinSW.
 
 <img src="/Redis Windows Server/images/Redis-Status.png" style=" width:400px">
