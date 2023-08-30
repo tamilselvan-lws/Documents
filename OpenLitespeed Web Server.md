@@ -504,10 +504,13 @@ Faveo Requires HTTPS so the SSL is a must to work with the latest versions of fa
 Faveo requires some background processes to continuously run. Basically those crons are needed to receive emails To do this, setup a cron that runs every minute that triggers the following command php artisan schedule:run.Verify your php ececutable location and replace it accordingly in the below command.
 
 ```
-(sudo -u nobody crontab -l 2>/dev/null; echo "* * * * * /usr/local/lsws/lsphp81/bin/lsphp /usr/local/lsws/Example/html/faveo/artisan schedule:run 2>&1") | sudo -u nobody crontab -
+sudo crontab -e
 ```
 ```
-sudo -u nobody crontab -l
+* * * * * /usr/bin/php -q /usr/local/lsws/Example/html/faveo/artisan schedule:run 2>&1
+```
+```
+sudo crontab -l
 ```
 
 
