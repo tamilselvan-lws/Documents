@@ -33,7 +33,7 @@ extension=php_redis.dll
 ```
 - Now go to Server Manager, open IIS Server and restart it. *(or restart Apache incase of Apache WebServer)*
 
-
+---
 
 <b>2. Install Redis </b>
 
@@ -64,6 +64,8 @@ The Redis installation is finished.
 
 Redis has been successfully installed, this can be confirmed in Command Prompt by typing *redis-cli*, a loopback address will be shown in the Command Prompt.
 
+---
+
 ## Install WinSW Service
 
 Download WinSW Config File.
@@ -76,11 +78,13 @@ Go inside the folder & copy the WinSW folder & paste it in C:\ .
 
 <img src="/Redis Windows Server/images/Redis-dir.png" style=" width:400px">
 
+---
+
 <b>4. General Instructions to Create WinSW Services</b>
 
 **NOTE: These are the General Instructions to create WinSW Services for Faveo. The actual ones are listed below as Faveo-Mail-Worker, Faveo-Recurring, Faveo-Reports & Faveo-Notifications.**
 
-Go to Command Prompt and configure WinSW-SERVICE by typing the following commands. (Faveo-Mail-Worker, Faveo-Recurring, Faveo-Reports & Faveo-Notifications are to be configured in actual).
+Go to Command Prompt and configure WinSW-SERVICE by typing the following commands. (Faveo-Mail-Worker, Faveo-Recurring, Faveo-Reports, Faveo-Notifications & Faveo-Deactivation are to be configured in actual).
 
 
 - Install your application as a service using the following command:
@@ -88,14 +92,15 @@ Go to Command Prompt and configure WinSW-SERVICE by typing the following command
 ```
 winsw install
 ```
+---
+**Follow the above general steps to create WinSW Services for FAVEO MAIL WORKER, FAVEO RECURRING, FAVEO REPORTS, FAVEO NOTIFICATIONS & FAVEO DEACTIVATION**
 
-**Follow the above general steps to create WinSW Services for FAVEO MAIL WORKER, FAVEO RECURRING, FAVEO REPORTS & FAVEO NOTIFICATIONS**
 
 - **FAVEO WORKER**
 
 Open a Command Prompt window with administrator privileges.
 
-Navigate to the directory containing the WinSW executable and your application files using the cd command. For example:
+Navigate to the directory containing the WinSW executable and your application files using the cd command.
 
 ```
 cd C:\WinSW\Faveo-Mail-Worker
@@ -112,13 +117,12 @@ Start the service:
 winsw start
 ```
 
-
+---
 - **FAVEO RECURRING**
 
 Open a Command Prompt window with administrator privileges.
 
-Navigate to the directory containing the WinSW executable and your application files using the cd command. For example:
-
+Navigate to the directory containing the WinSW executable and your application files using the cd command.
 ```
 cd C:\WinSW\Faveo-Recurring
 ```
@@ -133,12 +137,12 @@ Start the service:
 ```
 winsw start
 ```
-
+---
 - **FAVEO REPORTS**
 
 Open a Command Prompt window with administrator privileges.
 
-Navigate to the directory containing the WinSW executable and your application files using the cd command. For example:
+Navigate to the directory containing the WinSW executable and your application files using the cd command.
 
 ```
 cd C:\WinSW\Faveo-Reports
@@ -155,12 +159,12 @@ Start the service:
 winsw start
 ```
 
-
+---
 - **FAVEO NOTIFICATIONS**
 
 Open a Command Prompt window with administrator privileges.
 
-Navigate to the directory containing the WinSW executable and your application files using the cd command. For example:
+Navigate to the directory containing the WinSW executable and your application files using the cd command.
 
 ```
 cd C:\WinSW\Faveo-Notifications
@@ -177,12 +181,12 @@ Start the service:
 winsw start
 ```
 
-
+---
 - **FAVEO DEACTIVATYE AGENTS**
 
 Open a Command Prompt window with administrator privileges.
 
-Navigate to the directory containing the WinSW executable and your application files using the cd command. For example:
+Navigate to the directory containing the WinSW executable and your application files using the cd command.
 
 ```
 cd C:\WinSW\Faveo-Deactivation
@@ -202,3 +206,5 @@ winsw start
 Open service manager and check status of all the services configured by WinSW.
 
 <img src="/Redis Windows Server/images/Redis-Status.png" style=" width:400px">
+
+---
