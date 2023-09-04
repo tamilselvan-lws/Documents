@@ -92,6 +92,46 @@ Go to Command Prompt and configure WinSW-SERVICE by typing the following command
 ```
 winsw install
 ```
+This will register your application as a Windows service.
+
+#### Verifying the Installation
+
+After installing the service, you can use standard service management commands to control it. For example:
+
+- Start the service:
+
+```
+winsw start
+```
+
+- Checks the status of the service.
+
+```
+winsw status
+```
+
+- Stop the service:
+
+```
+winsw stop
+```
+
+- Restart the service:
+
+```
+winsw restart
+```
+#### Uninstalling a Service
+
+If you need to remove the service:
+
+Uninstall the service using the following command:
+
+```
+winsw uninstall
+```
+
+
 ---
 **Follow the above general steps to create WinSW Services for FAVEO MAIL WORKER, FAVEO RECURRING, FAVEO REPORTS, FAVEO NOTIFICATIONS & FAVEO DEACTIVATION**
 
