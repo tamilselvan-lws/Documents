@@ -49,13 +49,13 @@ Key is saved at:         /etc/letsencrypt/live/example.com/privkey.pem
 
 Next, configure the Faveo site on your OpenLiteSpeed server to use the SSL certificate. Navigate to the Virtual Host configuration and open the SSL tab. Edit the SSL Private Key & Certificate.
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-add-ssl-keys.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-add-ssl-keys.png" />
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-ssl-keys.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-ssl-keys.png" />
 
 Open the SSL tab. Edit the Security.
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-ssl-security-1.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-ssl-security-1.png" />
 
 Fill in the fields as follows:
 
@@ -67,11 +67,11 @@ ALPN: HTTP/2,HTTP/3
 Enable HTTP3/QUIC: Yes
 ```
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-ssl-security-2.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-ssl-security-2.png" />
 
 Once completed, go to Listeners and add a new listener.
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-add-listener.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-add-listener.png" />
 
 Fill in the fields as follows:
 
@@ -86,25 +86,25 @@ Secure: Yes
 
 Once all set, apply the new settings by clicking the save icon on the right.
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-listener-enable-secure.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-listener-enable-secure.png" />
 
 Next, view the SSL listener to configure the Virtual host mapping.
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-ssl-listener.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-ssl-listener.png" />
 
 Add a row in Virtual Host Mappings.
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-add-virtual-host.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-add-virtual-host.png" />
 
 Choose the virtual host and type in your domain name. Save the settings from the save button on the top right corner.
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-virtual-host-domains.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-virtual-host-domains.png" />
 
 Next, configure the Faveo site on your OpenLiteSpeed server to use the SSL certificate. Navigate to the SSL listener configuration and open the SSL tab. Edit the SSL Private Key & Certificate.
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-listener-ssl-1.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-listener-ssl-1.png" />
 
-<img alt="Ubuntu" src="/Images/openlitespeed-images/op-listener-ssl-2.png" />
+<img alt="Ubuntu" src="/INSTALLATION GUIDE/Images/openlitespeed-images/op-listener-ssl-2.png" />
 
 
 Once you’ve configured the SSL with your OpenLiteSpeed server, click the gracefully restart icon to apply the changes.
