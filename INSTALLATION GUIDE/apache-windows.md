@@ -5,7 +5,7 @@ permalink: /docs/installation/providers/enterprise/apache-windows/
 redirect_from:
   - /theme-setup/
 last_modified_at: 2022-10-25
-last_modified_by: Mohammad_Asif
+last_modified_by: TamilSelvan_M
 toc: true
 title: Faveo Installation on Windows with Apache Web Server
 ---
@@ -49,7 +49,7 @@ Before we follow the installation steps <a href="https://notepad-plus-plus.org/d
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache1.png" alt="" style=" width:500px ; height:250px ">
 
-- Extract its contents of the zip file to a suitable location on your Windows server to be configured. It is recommended to extract the contents in the C drive of the server.
+- Extract its contents of the zip file to a suitable location on your Windows server to be configured. It is recommended to extract the contents in the <code>C drive</code> of the server.
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache3.png" alt="" style=" width:500px ; height:250px ">
 
@@ -59,18 +59,18 @@ In addition, you need to have the relevant C++ Redistributable for Visual Studio
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache4.png" alt="" style=" width:500px ; height:250px ">
 
 - Execute the installer to perform the required installation.
-- Accept the License Agreement terms and click *Install*.
+- Accept the License Agreement terms and click <code>*Install*</code>.
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache4a.png" alt="" style=" width:500px ; height:250px ">
 
-- Click *Close* to finish the installation.
+- Click <code>*Close*</code> to finish the installation.
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache4b.png" alt="" style=" width:500px ; height:250px ">
 
 
 <b>b. Run Apache </b>
 
-Open a Command Prompt in the *C:\Apache24\bin* folder. (i.e., the location where you extracted Apache).
+Open a Command Prompt in the <Code>*C:\Apache24\bin*</code> folder. (i.e., the location where you extracted Apache).
 
 - For command prompt, enter the following command to start Apache:
 
@@ -79,7 +79,7 @@ Httpd.exe
 ```
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache10.png" alt="" style=" width:500px ; height:100px ">
 
-You might see a Windows Firewall prompt. Allow the access to be appropriate. 
+You might see a Windows Firewall prompt. <code>Allow</code> the access to be appropriate. 
 
 Failing to allow Apache access through your server’s firewall will result in other computers/devices being unable to connect to your web server.
 
@@ -95,7 +95,7 @@ If so, you either need to stop/disable IIS in order to run Apache or change the 
 
 - Keep the previous command window open, and navigate to the below address with your web browser.
 
-```
+```cpp
 http://127.0.0.1
 ```
 
@@ -111,28 +111,28 @@ To ensure that your Apache web server runs all the time, you need to install it 
 
 Here is how you can install Apache as a Windows Service in an easy and quick way:
 
-Step 1: Open an administrative command prompt window, navigate to the *C:\Apache24\bin* location and enter the following command:
+Step 1: Open an administrative command prompt window, navigate to the <code>*C:\Apache24\bin*</code> location and enter the following command:
 
-```
+```cpp
 httpd.exe -k install -n "Apache HTTP Server"
 ```
 
 - You will see the following output,
 
-```
+```cpp
 Installing the 'Apache HTTP Server' service
 The 'Apache HTTP Server' service is successfully installed.
 Testing httpd.conf....
 Errors reported here must be corrected before the service can be started.
 ```
 
-Step 2: Then, write the following command and press *Enter* In the Command Prompt window.
+Step 2: Then, write the following command and press <code>*Enter*</code> In the Command Prompt window.
 
-```
+```cpp
 services.msc
 ```
 
-Look for the service *Apache HTTP Server.* You should see *Automatic* towards the left of that line. If you don’t, change the Startup Type to *Automatic* by double-clicking the line.
+Look for the service <code>*Apache HTTP Server.*</code> You should see <code>*Automatic*</code> towards the left of that line. If you don’t, change the Startup Type to *Automatic* by double-clicking the line.
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache13.png" alt="" style=" width:500px ; height:350px ">
 
@@ -146,31 +146,31 @@ http://127.0.0.1
 
 Configuring the Window's Firewall is the final step to install Apache web server on Windows Server 2022. It allows connections from the Internet to your new web server. Here are the steps that you need to follow:
 
-- Step 1: Go to Start Menu and enter a search query, *firewall*. Select the *Windows Firewall With Advanced Security* item.
+- Step 1: Go to Start Menu and enter a search query, <code>*firewall*</code>. Select the <code>*Windows Firewall With Advanced Security*</code> item.
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache14.png" alt="" style=" width:500px ; height:110px ">
 
-- Step 2: Select the *New Rule* on the right-hand sidebar.
+- Step 2: Select the <code>*New Rule*</code> on the right-hand sidebar.
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache15.png" alt="" style=" width:500px ; height:130px ">
 
-- Step 3: Click on *Port,* and then click *Next*. 
+- Step 3: Click on <code>*Port,*</code> and then click <code>*Next*</code>. 
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache16.png" alt="" style=" width:500px ; height:250px ">
 
-- Step 4: Then, select the radio button next to *Specific remote ports:* and enter the following into the input box: *80, 443.*
+- Step 4: Then, select the radio button next to <code>*Specific remote ports:*</code> and enter the following into the input box: <code>*80, 443.*</code>
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache16b.png" alt="" style=" width:500px ; height:250px ">
 
-- Step 5: Click *Next* and select the *Allow the connection* option.
+- Step 5: Click <code>*Next*</code> and select the <code>*Allow the connection*</code> option.
 
-- Step 6: Click *Next*. Make sure that all the boxes on the next page are selected and then click *Next* again.
+- Step 6: Click <code>*Next*</code>. Make sure that all the boxes on the next page are selected and then click <code>*Next*</code> again.
 
-- Step 7: In the *Name* section, enter a description which ensures that you will be able to remember the rule’s purpose later such as: *Allow Incoming Apache Traffic.*
+- Step 7: In the <code>*Name*</code> section, enter a description which ensures that you will be able to remember the rule’s purpose later such as: <code>*Allow Incoming Apache Traffic.*</code>
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache17.png" alt="" style=" width:500px ; height:250px ">
 
-- Step 8: Click *Finish*.
+- Step 8: Click <code>*Finish*</code>.
 - Step 9: Test the server for other devices by connecting to your server’s IP address from a device other than the one you are using to connect to the server right now. Open a web browser on that device and enter the IP address of your server like:
 
  ```
