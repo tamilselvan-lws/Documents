@@ -195,7 +195,7 @@ name="2PHP-8.1-for-Apache-Web-Server"></a>
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/GUI-images/php819.png" alt="" style=" width:500px ; height:150px ">
 
-- Extract the zip file & rename it to *php*. Now move the renamed *php* folder to *C drive*.
+- Extract the zip file & rename it to <code>*php*</code>. Now move the renamed <code>*php*</code> folder to <code>*C drive*</code>.
 
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache20.png" alt="" style=" width:500px ; height:150px ">
@@ -209,15 +209,15 @@ name="2PHP-8.1-for-Apache-Web-Server"></a>
 
  <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache21.png" alt="" style=" width:500px ; height:100px ">
 
- - Step 1: Unzip the *mod_Fcgi file*, copy the *mod_fcgid.so* file to the *C:\Apache24\modules* folder.
+ - Step 1: Unzip the <code>*mod_Fcgi file*</code>, copy the <code>*mod_fcgid.so*</code> file to the <code>*C:\Apache24\modules*</code> folder.
 
   <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache22.png" alt="" style=" width:500px ; height:100px ">
 
- - Step 2:Edit the *httpd.conf* file located in the *C:\Apache24\conf* \ folder using a text editor in Administrator mode, so that any changes you make are saved.
+ - Step 2:Edit the <code>*httpd.conf*</code> file located in the <code>*C:\Apache24\conf*</code> \ folder using a text editor in Administrator mode, so that any changes you make are saved.
 
- - Add the content below after the *#LoadModule xml2enc_module modules/mod_xml2enc.so line:*
+ - Add the content below after the <code>*#LoadModule xml2enc_module modules/mod_xml2enc.so*</code> line:
 
- ```
+ ```cpp
 LoadModule fcgid_module modules/mod_fcgid.so
 FcgidInitialEnv PHPRC "/php"
 FcgidInitialEnv PHP_FCGI_MAX_REQUESTS "100000"
@@ -239,13 +239,13 @@ FcgidWrapper "/php/php-cgi.exe" .php
 
   <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache24a.png" alt="" style=" width:500px ; height:170px ">
 
-- Step 3: Search for *#ServerName www.example.com:80* and change this line to below:
+- Step 3: Search for <code>*#ServerName www.example.com:80*</code> and change this line to below:
 
 ```
 ServerName YOURDOMAIN:80
 ```
 
-- Step 4: Change the contents of the *DirectoryIndex* directive by adding the following contents to the directive line:
+- Step 4: Change the contents of the <code>*DirectoryIndex*</code> directive by adding the following contents to the directive line:
 
 ```
 index.php index.phtml
@@ -254,28 +254,28 @@ After adding this, it will look like below:
 
 <img src="https://raw.githubusercontent.com/ladybirdweb/faveo-server-images/master/_docs/installation/providers/enterprise/windows-images/apache25.png" alt="" style=" width:500px ; height:100px ">
 
-- Step 5: Set the *${SRVROOT}* variable with your Apache folder path:
-Search for the *Define SRVROOT* and edit it as follows:
+- Step 5: Set the <code>*${SRVROOT}*</code> variable with your Apache folder path:
+Search for the <code>*Define SRVROOT*</code> and edit it as follows:
 
 ```
 Define SRVROOT "c:/Apache24"
 ```
 
-- Step 6: Add the Options ExecCGI command below the Require all granted line in the *<Directory "${SRVROOT}/htdocs">* directive.
+- Step 6: Edit the Options ExecCGI command below the Require all granted line in the <code>*<Directory "${SRVROOT}/htdocs">*</code> directive.
 
 ```
-Require all granted
-	Options ExecCGI
-</Directory>
+	Options Indexes FollowSymLinks ExecCGI
+  AllowOverride All
+
 ```
 
-- Step 7: Search for the *< IfModule mime_module >* directive and add the below content above this directive:
+- Step 7: Search for the <code>IfModule mime_module</code> directive and add the below content above this directive:
 
 ```
 <Directory "/php">
-AllowOverride None
-Options None
-Require all granted
+    AllowOverride None
+    Options None
+    Require all granted
 </Directory>
 ```
 
@@ -305,18 +305,17 @@ Default Extensions
 
 ```
 extension=bz2
+extension=ldap
 extension=curl
-extension=gd2
+extension=fileinfo
+extension=gd
 extension=gettext
 extension=imap
-extension=ldap
-extension=fileinfo
 extension=mbstring
-extension=openssl
 extension=exif
-extension=xslp
-extension=pdo_mysql
 extension=mysqli
+extension=openssl
+extension=pdo_mysql
 extension=soap
 extension=sockets
 extension=sodium
