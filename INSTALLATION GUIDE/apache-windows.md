@@ -264,8 +264,8 @@ Define SRVROOT "c:/Apache24"
 - Step 6: Edit the Options ExecCGI command below the Require all granted line in the <code>*<Directory "${SRVROOT}/htdocs">*</code> directive.
 
 ```
-	Options Indexes FollowSymLinks ExecCGI
-  AllowOverride All
+Options Indexes FollowSymLinks ExecCGI
+AllowOverride All
 
 ```
 
