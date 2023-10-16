@@ -113,9 +113,9 @@ LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 ```
 
-- You may be prompted to confirm the execution of scripts. Enter "A" and press Enter to allow the script to run.
+- You may be prompted to confirm the execution of scripts. Enter <code><b>"A"</b></code> and press Enter to allow the script to run.
 
-- Wait for the installation to complete. Chocolatey will be installed in the "C:\ProgramData\chocolatey" directory by default.
+- Wait for the installation to complete. Chocolatey will be installed in the <code><b>"C:\ProgramData\chocolatey"</b></code> directory by default.
 
 - To verify the installation, open a new Command Prompt or PowerShell window and run:
 
@@ -156,7 +156,7 @@ openssl version
 
 ### Generate a private key for the CA
 
-Create a directory named SSL under C directory like C:\SSL, the following commands will create the SSL files those files will be saved in the directory which we create.
+Create a directory named SSL under C directory like <code><b>C:\SSL</b></code>, the following commands will create the SSL files those files will be saved in the directory which we create.
 
 - Open Command Prompt from the SSL directory that we created,
 
@@ -247,35 +247,6 @@ openssl pkcs12 -export -out cert.pfx -inkey private.key -in faveolocal.crt -cert
 The above command will create a .pfx file with the name cert.pfx in the SSL directory.
 
 
-
-
-### Edit the “hosts” file on the OS to Map the Custom Domain to Loopback Address.
-
-- Open the hosts file from the path C:\Windows\System32\drivers\etc
-
----image -----
-
-- Map your custom domain to 127.0.0.1
-
----images-----
-
-- Save and Close the File.
-
-- if the above is done we need to edit the php.ini file which is found inside the PHP root directory. Uncomment and add the location of cacert.pem to “openssl.cafile” like.
-```
-openssl.cafile = "C:\php\cacert.pem"
-```
-
-- Edit the C:\Apache24\conf\extra\httpd-ssl.conf file, search for <VirtualHost _default_:443>
-- Turn SSL Engine on & add the certificate paths respectively as shown below:
-
-```
-SSLEngine on
-SSLCertificateFile "C:\SSL\faveolocal.crt"
-SSLCertificateKeyFile "C:\SSL\private.key"
-SSLCACertificateFile "C:\SSL\faveorootCA.crt"
-```
-
 ### Download & Enable cacert.pem File in PHP Configuration File
 
 
@@ -290,9 +261,36 @@ curl.cainfo = "C:\wamp64\bin\php\php8.1.13\cacert.pem"
 
 ----images----
 
-- Edit the cacert-2021-10-26.pem file and append the content copied from faveorootCA.crt in this file.
+- Edit the cacert.pem file and append the content copied from faveorootCA.crt in this file.
 
 ----images----
 
 - Save and Close the File.
+
+### Edit the “hosts” file on the OS to Map the Custom Domain to Loopback Address.
+
+- Open the hosts file from the path <code><b>C:\Windows\System32\drivers\etc</code>/<b>
+
+---image -----
+
+- Map your custom domain to 127.0.0.1
+
+---images-----
+
+- Save and Close the File.
+
+- if the above is done we need to edit the php.ini file which is found inside the PHP root directory. Uncomment and add the location of <code><b>cacert.pem</code></b> to <code><b>“openssl.cafile”</code></b> like.
+```
+openssl.cafile = "C:\php\cacert.pem"
+```
+
+- Edit the <code><b>C:\Apache24\conf\extra\httpd-ssl.conf</code></b> file, search for <VirtualHost _default_:443>
+- Turn SSL Engine on & add the certificate paths respectively as shown below:
+
+```
+SSLEngine on
+SSLCertificateFile "C:\SSL\faveolocal.crt"
+SSLCertificateKeyFile "C:\SSL\private.key"
+SSLCACertificateFile "C:\SSL\faveorootCA.crt"
+```
 
