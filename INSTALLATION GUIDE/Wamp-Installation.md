@@ -269,7 +269,7 @@ curl.cainfo = "C:\wamp64\bin\php\php8.1.13\cacert.pem"
 
 ### Edit the “hosts” file on the OS to Map the Custom Domain to Loopback Address.
 
-- Open the hosts file from the path <code><b>C:\Windows\System32\drivers\etc</code>/<b>
+- Open the hosts file from the path <code><b>C:\Windows\System32\drivers\etc</code><b>
 
 ---image -----
 
