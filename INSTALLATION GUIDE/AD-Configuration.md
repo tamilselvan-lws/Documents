@@ -67,11 +67,11 @@ NOTE: Please don’t close the Server Manager application as you will be using t
 
 So far, you’ve just added the required feature “Active Directory Domain Services.” The feature “Active Directory Domain Services” you’ve just added needs to be promoted to a DC (Domain Controller). Here are the following steps needed to do so:
 
-- 1. Relaunch “Server Manager” if you have already closed it. On your Server Manager dashboard, you’ll should see a yellow triangle warning sign on the top right of the window near the menu bar. This sign appears only if Active Directory Domain Services was properly installed.
+1. Relaunch “Server Manager” if you have already closed it. On your Server Manager dashboard, you’ll should see a yellow triangle warning sign on the top right of the window near the menu bar. This sign appears only if Active Directory Domain Services was properly installed.
 
-- 2. Click on the warning sign and a dropdown list will show you the required actions termed “post-deployment configuration.”
+2. Click on the warning sign and a dropdown list will show you the required actions termed “post-deployment configuration.”
 
-- 3. Look for the “Promote this server to a domain controller” option and click on it.
+3. Look for the “Promote this server to a domain controller” option and click on it.
 
 <img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-11.png" style=" width:500px ; height:250px ">
 
@@ -123,8 +123,6 @@ At the first checkpoint “Deployment Configuration”, please select the “add
 
 Congratulations! You have successfully set up Active Directory on your Windows Server 2022. Next, your server machine will need to be restarted once the promotion is successfully complete.
 
-
-
 ## Important PowerShell Commands After Active Directory Setup
 
 Verifing if the Active Directory installation was successfully completed:
@@ -144,3 +142,49 @@ To get the details of your domain, use this command:
 ```
 Get-ADDomain exampledomain.com
 ```
+
+
+## Create Group on Active Directory
+
+1. Open Server Manager, click Tools and select Active Directory Users and Computer.
+
+<img src="images" style=" width:500px ; height:250px ">
+
+2. Right-click on Users, click New and select Group.
+
+<img src="images" style=" width:500px ; height:250px ">
+
+3. Enter the Group name and click OK.
+
+Default Group scope: Global
+Default Group type: Security
+
+<img src="images" style=" width:500px ; height:250px ">
+
+4. Right-click on the Group name and select Properties.
+
+<img src="images" style=" width:500px ; height:250px ">
+
+5. Select the Members tab and click Add.
+
+<img src="images" style=" width:500px ; height:250px ">
+
+6. Click Advanced.
+
+<img src="images" style=" width:500px ; height:250px ">
+
+7. Click Find Now, Select the Users and Click OK.
+
+we select user1 and user2.
+
+<img src="images" style=" width:500px ; height:250px ">
+
+8. Click OK.
+
+<img src="images" style=" width:500px ; height:250px ">
+
+9. Click OK.
+
+<img src="images" style=" width:500px ; height:250px ">
+
+The Active Directory Group has been created.
