@@ -144,47 +144,66 @@ Get-ADDomain exampledomain.com
 ```
 
 
-## Create Group on Active Directory
+### Create User on Active Directory
 
 1. Open Server Manager, click Tools and select Active Directory Users and Computer.
 
-<img src="images" style=" width:500px ; height:250px ">
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-1.png" style=" width:500px ; height:250px ">
+
+2. Right-click on Users, click New and select User.
+
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-2.png" style=" width:500px ; height:250px ">
+
+3. Enter the Name and User login name for a new user and click Next.
+
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-3.png" style=" width:500px ; height:250px ">
+
+4. Set a password for a new User Click Next.
+
+- Tick User cannot change password.
+- Tick Password never expires.
+
+If you need the user to change the password at the next logon Tick User must change password at the next logon.
+
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-4.png" style=" width:500px ; height:250px ">
+
+5. Click Finish.
+
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-5.png" style=" width:500px ; height:250px ">
+
+### Create Group on Active Directory
+
+1. Open Server Manager, click Tools and select Active Directory Users and Computer.
+
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-1.png" style=" width:500px ; height:250px ">
 
 2. Right-click on Users, click New and select Group.
 
-<img src="images" style=" width:500px ; height:250px ">
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-6.png" style=" width:500px ; height:250px ">
 
 3. Enter the Group name and click OK.
 
-Default Group scope: Global
-Default Group type: Security
+- Default Group scope: Global
+- Default Group type: Security
 
-<img src="images" style=" width:500px ; height:250px ">
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-7.png" style=" width:500px ; height:250px ">
 
 4. Right-click on the Group name and select Properties.
 
-<img src="images" style=" width:500px ; height:250px ">
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-8.png" style=" width:500px ; height:250px ">
 
 5. Select the Members tab and click Add.
 
-<img src="images" style=" width:500px ; height:250px ">
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-9.png" style=" width:500px ; height:250px ">
 
 6. Click Advanced.
 
-<img src="images" style=" width:500px ; height:250px ">
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-10.png" style=" width:500px ; height:250px ">
 
 7. Click Find Now, Select the Users and Click OK.
 
-we select user1 and user2.
-
-<img src="images" style=" width:500px ; height:250px ">
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-11.png" style=" width:500px ; height:250px ">
 
 8. Click OK.
 
-<img src="images" style=" width:500px ; height:250px ">
-
-9. Click OK.
-
-<img src="images" style=" width:500px ; height:250px ">
-
-The Active Directory Group has been created.
+<img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/AD-User-12.png" style=" width:500px ; height:250px ">
