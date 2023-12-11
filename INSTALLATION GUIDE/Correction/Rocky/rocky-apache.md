@@ -1,23 +1,23 @@
 ---
 layout: single
 type: docs
-permalink: /docs/installation/providers/enterprise/alma9-nginx/
+permalink: /docs/installation/providers/enterprise/rocky9-apache/
 redirect_from:
   - /theme-setup/
 last_modified_at: 2023-12-02
 toc: true
-title: Installing Faveo Helpdesk Alma Linux with Nginx Webserver
+title: Installing Faveo Helpdesk on Rocky OS
 ---
 
-<img alt="Alma Linux Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/AlmaLinux_Icon_Logo.svg/1024px-AlmaLinux_Icon_Logo.svg.png?20211201021832" width="200"  />
+<img alt="Rocky OS Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Rocky_Linux_wordmark.svg/800px-Rocky_Linux_wordmark.svg.png" width="200"  />
 
-Faveo can run on [Alma Linux](https://almalinux.org/).
+Faveo can run on [Rocky](https://rockylinux.org/download/).
 
 - [<strong>Installation steps :</strong>](#installation-steps-)
     - [<strong> 1. Update your Packages and install some utility tools</strong>](#-1-update-your-packages-and-install-some-utility-tools)
     - [<strong>2. Upload Faveo</strong>](#2-upload-faveo)
     - [<strong>3. Setup the database</strong>](#3-setup-the-database)
-    - [<strong>4. Configure Nginx webserver </strong>](#4-configure-nginx-webserver-)
+    - [<strong>4. Configure Apache webserver</strong>](#4-configure-apache-webserver)
     - [<strong>5. Configure cron job</strong>](#5-configure-cron-job)
     - [<strong>6. Redis Installation</strong>](#6-redis-installation)
     - [<strong>7. SSL Installation</strong>](#7-ssl-installation)
@@ -31,7 +31,7 @@ Faveo can run on [Alma Linux](https://almalinux.org/).
 
 Faveo depends on the following:
 
--   **Web Server**  Nginx/Apache 
+-   **Apache** (with mod_rewrite enabled) 
 -   **PHP 8.1+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip
 -   **MySQL 8.0+** or **MariaDB 10.6+**
 -   **SSL** ,Trusted CA Signed or Self-Signed SSL
@@ -51,40 +51,43 @@ yum update -y && yum install unzip wget nano yum-utils curl openssl zip git -y
 
 <b> 1.a. Install php-8.1 Packages </b>
 
-### Alma 8 
+### Rocky 8
+```sh
+sudo dnf -y install epel-release
+sudo dnf config-manager --set-enabled powertools
+
+sudo dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+sudo dnf -y makecache
+sudo dnf -y repolist
+```
+
+Use the dnf module list command to see the options available for php
+
+```sh
+sudo dnf module list php
+sudo dnf -y module reset php
+```
+Enable PHP 8.1 with the following command.
+```sh
+sudo dnf module install php:remi-8.1
+```
+Now install php 8.1 and the required extensions.
+```sh
+sudo dnf install php -y
+yum -y install php-cli php-common php-fpm php-gd php-mbstring php-pecl-mcrypt php-mysqlnd php-odbc php-pdo php-xml  php-opcache php-imap php-bcmath php-ldap php-pecl-zip php-soap php-redis
+```
+
+### Rocky 9
 
 ```sh
 sudo dnf upgrade --refresh -y
-```
-
-```sh
-sudo dnf install \
-    https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \
-    https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-8.noarch.rpm
-```
-
-```sh
-sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
-
-```
----
-
-### Alma 9 
-
-```sh
-sudo dnf upgrade --refresh -y
-```
-```
+sudo dnf config-manager --set-enabled crb
 sudo dnf install \
     https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
     https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-9.noarch.rpm
-```
-
-```
+    
 sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm -y
 ```
-
---- 
 Use the dnf module list command to see the options available for php
 
 ```sh
@@ -99,14 +102,14 @@ Now install php 8.1 and the required extensions.
 sudo dnf install php -y
 yum -y install php-cli php-common php-fpm php-gd php-mbstring php-pecl-mcrypt php-mysqlnd php-odbc php-pdo php-xml  php-opcache php-imap php-bcmath php-ldap php-pecl-zip php-soap php-redis
 ```
-<b> 1.b. Install and run Nginx </b>
 
-Use the below steps to install and start Nginx
+<b> 1.b. Install and run Apache</b>
+Install and Enable Apache Server
 
 ```sh
-yum install -y nginx
-systemctl start nginx
-systemctl enable nginx
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
 ```
 
 <b> 1.c. Setting Up ionCube</b>
@@ -204,6 +207,7 @@ cd /var/www/
 git clone https://github.com/ladybirdweb/faveo-helpdesk.git faveo
 ```
 You should check out a tagged version of Faveo since `master` branch may not always be stable. Find the latest official version on the [release page](https://github.com/ladybirdweb/faveo-helpdesk/releases)
+
 <a id="3-setup-the-database" name="3-setup-the-database"></a>
 
 ### <strong>3. Setup the database</strong>
@@ -238,177 +242,111 @@ And finally we apply the changes and exit the database.
 FLUSH PRIVILEGES;
 exit
 ```
+
 > **NOTE** :
 > Please refrain from making direct MySQL/MariaDB modifications. Contact our support team for assistance.
 
-<a id="4-configure-nginx-webserver-" name="4-configure-nginx-webserver-"></a>
+<a id="4-configure-apache-webserver" name="4-configure-apache-webserver"></a>
 
-###  <strong>4. Configure Nginx webserver </strong>
+### <strong>4. Configure Apache webserver</strong>
 
 **4.a.** <b>Give proper permissions to the project directory by running:</b>
 
 ```sh
-chown -R nginx:nginx /var/www/faveo
+chown -R apache:apache /var/www/faveo
 cd /var/www/faveo
 find . -type f -exec chmod 644 {} \;
 find . -type d -exec chmod 755 {} \;
 ```
-By default SELINUX will be in Enforcing mode run the follwing command to switch it to Permissive mode and restart the machine once in order to take effect.
+By default SELINUX will be Enforcing run the follwing comand to switch it to Permissive mode and restart the machine once in order to take effect.
 ```sh
 sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
 reboot -f
 ```
-**4.b.** <b>Edit nginx.conf file and replace the default server block code with the following</b>
+
+**4.b.** <b>Enable the rewrite module of the Apache webserver:</b>
+
+Check whether the Module exists in Apache modules directory.
 
 ```sh
-nano /etc/nginx/nginx.conf
+ls /etc/httpd/modules | grep mod_rewrite
 ```
-Replace the default server block code with the following. 
-Also relpace --YOUR DOMAIN NAME-- with your Domain name.
-
+Check if the module is loaded
+```sh
+grep -i LoadModule /etc/httpd/conf/httpd.conf | grep rewrite
 ```
-user nginx;
-worker_processes auto;
-error_log /var/log/nginx/error.log;
-pid /run/nginx.pid;
-
-# Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
-include /usr/share/nginx/modules/*.conf;
-
-events {
-    worker_connections 1024;
-}
-
-http {
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
-
-    access_log  /var/log/nginx/access.log  main;
-
-    sendfile            on;
-    tcp_nopush          on;
-    tcp_nodelay         on;
-    keepalive_timeout   65;
-    types_hash_max_size 4096;
-
-    include             /etc/nginx/mime.types;
-    default_type        application/octet-stream;
-
-    # Load modular configuration files from the /etc/nginx/conf.d directory.
-    # See http://nginx.org/en/docs/ngx_core_module.html#include
-    # for more information.
-    include /etc/nginx/conf.d/*.conf;
-
-    server {
-        server_name  --YOUR DOMAIN NAME--;
-        root         /var/www/faveo/public/;
-        index index.php index.html index.htm;
-
-        # Load configuration files for the default server block.
-        include /etc/nginx/default.d/*.conf;
-
-#This is for user friendly URL 
-	location ~ \.php$ {
-	    try_files $uri =404;
-	    fastcgi_pass 127.0.0.1:9000;
-	    fastcgi_index index.php;
-	    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-	    include fastcgi_params;
-	}
-
-	location / {
-		try_files $uri $uri/ /index.php?$query_string;
-	}
-
-	location ~* \.html$ {
-	    expires -1;
-	}
-
-	location ~* \.(css|gif|jpe?g|png)$ {
-	    expires 1M;
-	    add_header Pragma public;
-	    add_header Cache-Control "public, must-revalidate, proxy-revalidate";
-	}
-
-        error_page 404 /404.html;
-        location = /404.html {
-        }
-
-        error_page 500 502 503 504 /50x.html;
-        location = /50x.html {
-        }
-    }
-
-	gzip on;
-	gzip_http_version 1.1;
-	gzip_vary on;
-	gzip_comp_level 6;
-	gzip_proxied any;
-	gzip_types application/atom+xml
-           application/javascript
-           application/json
-           application/vnd.ms-fontobject
-           application/x-font-ttf
-           application/x-web-app-manifest+json
-           application/xhtml+xml
-           application/xml
-           font/opentype
-           image/svg+xml
-           image/x-icon
-           text/css
-           #text/html -- text/html is gzipped by default by nginx
-           text/plain
-           text/xml;
-	gzip_buffers 16 8k;
-	gzip_disable "MSIE [1-6]\.(?!.*SV1)";
-
-}
-```
-
-**4.c.** <b>Edit config file for PHP FPM using vim editor</b>
+If the output af the above command is blank then add the below line in **/etc/httpd/conf/httpd.conf**
 
 ```sh
-nano /etc/php-fpm.d/www.conf
-```
-You have to replace these lines.
-
-```
-user = apache   (to)   user = nginx
-group = apache  (to)   group = nginx
-
-listen.owner = nobody   (to)    listen.owner = nginx
-listen.group = nobody   (to)    listen.group = nginx
+LoadModule rewrite_module modules/mod_rewrite.so
 ```
 
-Restart PHP-FPM and NGINX
+
+Also disable Directory Browsing on Apache, change Options Indexes FollowSymLinks to Options -Indexes +FollowSymLinks & AllowOverride value from none to All under <Directory /var/www/> section.
+
 ```sh
-systemctl start php-fpm.service
-systemctl enable php-fpm.service
-systemctl restart nginx
+<Directory "/var/www">
+    Options -Indexes +FollowSymLinks
+    AllowOverride All 
+    # Allow open access:
+    Require all granted
+</Directory>
 ```
+
+
+**4.c.** <b>Configure a new faveo site in apache by doing:</b>
+
+Pick a editor of your choice copy the following and replace '--DOMAINNAME--' with the Domain name mapped to your Server's IP or you can just comment the 'ServerName' directive if Faveo is the only website served by your server.
+```sh
+nano /etc/httpd/conf.d/faveo.conf
+```
+
+
+
+```apache
+
+<VirtualHost *:80> 
+ServerName --DOMAINNAME-- 
+ServerAdmin webmaster@localhost 
+DocumentRoot /var/www/faveo/public 
+<Directory /var/www/faveo> 
+AllowOverride All 
+</Directory> 
+ErrorLog /var/log/httpd/faveo-error.log 
+CustomLog /var/log/httpd/faveo-access.log combined
+</VirtualHost>
+```
+
+**4.d.** Apply the new `.conf` file and restart Apache. You can do that by running:
+
+```sh
+systemctl restart httpd.service
+```
+
+
 <a id="5-configure-cron-job" name="5-configure-cron-job"></a>
 
 ### <strong>5. Configure cron job</strong>
 
 Faveo requires some background processes to continuously run. 
 Basically those crons are needed to receive emails
-To do this, setup a cron that runs every minute that triggers the following command `php artisan schedule:run`.
+To do this, setup a cron that runs every minute that triggers the following command `php artisan schedule:run`. Verify your php ececutable location and replace it accordingly in the below command.
 
 [comment]: <Create a new `/etc/cron.d/faveo` file with:>
 
 ```sh
-(sudo -u nginx crontab -l 2>/dev/null; echo "* * * * * /usr/bin/php /var/www/faveo/artisan schedule:run 2>&1") | sudo -u nginx crontab -
+(sudo -u apache crontab -l 2>/dev/null; echo "* * * * * /usr/bin/php /var/www/faveo/artisan schedule:run 2>&1") | sudo -u apache crontab -
 ```
 
 <a id="6-redis-installation" name="6-redis-installation"></a>
 
 ### <strong>6. Redis Installation</strong>
+
 Redis is an open-source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
 
 This will improve system performance and is highly recommended.
 
-[Redis installation documentation](/docs/installation/providers/enterprise/alma-redis)
+[Redis installation documentation](/docs/installation/providers/enterprise/rocky-redis)
 
 <a id="7-ssl-installation" name="7-ssl-installation"></a>
 
@@ -416,16 +354,20 @@ This will improve system performance and is highly recommended.
 
 Secure Sockets Layer (SSL) is a standard security technology for establishing an encrypted link between a server and a client. Let's Encrypt is a free, automated, and open certificate authority.
 
-This is an optional step and will improve system security and is highly recommended.
+Faveo Requires HTTPS so the SSL is a must to work with the latest versions of faveo, so for the internal network and if there is no domain for free you can use the Self-Signed-SSL.
 
-[Let’s Encrypt SSL installation documentation](/docs/installation/providers/enterprise/alma-nginx-ssl)
+[Let’s Encrypt SSL installation documentation](/docs/installation/providers/enterprise/rocky-apache-ssl)
+
+[Self Signed SSL Certificate Documentation](/docs/installation/providers/enterprise/self-signed-ssl-rocky/)
 
 <a id="8-install-faveo" name="8-install-faveo"></a>
 
 ### <strong>8. Install Faveo</strong>
-At this point if the domainname is propagated properly with your server’s IP you can open Faveo in browser just by entering your domainname. You can also check the Propagation update by Visiting this site www.whatsmydns.net.
 
-Now you can install Faveo via [GUI](/docs/installation/installer/gui) Wizard or [CLI](/docs/installation/installer/cli)
+At this point if the domainname is propagated properly with your server's IP you can open Faveo in browser just by entering your domainname.
+You can also check the Propagation update by Visiting this site www.whatsmydns.net.
+
+Now you can install Faveo via [GUI](/docs/installation/installer/gui) Wizard or [CLI](/docs/installation/installer/cli).
 
 <a id="9-faveo-backup" name="9-faveo-backup"></a>
 
@@ -434,10 +376,8 @@ Now you can install Faveo via [GUI](/docs/installation/installer/gui) Wizard or 
 
 At this stage, Faveo has been installed, it is time to setup the backup for Faveo File System and Database. [Follow this article](/docs/helper/backup) to setup Faveo backup.
 
-
 <a id="10-final-step" name="10-final-step"></a>
 
-### <strong>10. Final step</strong>
+### <strong>10. Final Step</strong>
 
 The final step is to have fun with your newly created instance, which should be up and running to `http://localhost` or the domain you have configured Faveo with.
-

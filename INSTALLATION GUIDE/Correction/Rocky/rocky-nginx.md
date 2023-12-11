@@ -1,17 +1,17 @@
 ---
 layout: single
 type: docs
-permalink: /docs/installation/providers/enterprise/alma9-nginx/
+permalink: /docs/installation/providers/enterprise/rocky9-nginx/
 redirect_from:
   - /theme-setup/
 last_modified_at: 2023-12-02
 toc: true
-title: Installing Faveo Helpdesk Alma Linux with Nginx Webserver
+title: Installing Faveo Helpdesk on Rocky OS With Nginx Webserver
 ---
 
-<img alt="Alma Linux Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/AlmaLinux_Icon_Logo.svg/1024px-AlmaLinux_Icon_Logo.svg.png?20211201021832" width="200"  />
+<img alt="Rocky OS Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Rocky_Linux_wordmark.svg/800px-Rocky_Linux_wordmark.svg.png" width="200"  />
 
-Faveo can run on [Alma Linux](https://almalinux.org/).
+Faveo can run on [Rocky](https://rockylinux.org/download/).
 
 - [<strong>Installation steps :</strong>](#installation-steps-)
     - [<strong> 1. Update your Packages and install some utility tools</strong>](#-1-update-your-packages-and-install-some-utility-tools)
@@ -51,40 +51,43 @@ yum update -y && yum install unzip wget nano yum-utils curl openssl zip git -y
 
 <b> 1.a. Install php-8.1 Packages </b>
 
-### Alma 8 
+### Rocky 8
+```sh
+sudo dnf -y install epel-release
+sudo dnf config-manager --set-enabled powertools
+
+sudo dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+sudo dnf -y makecache
+sudo dnf -y repolist
+```
+
+Use the dnf module list command to see the options available for php
+
+```sh
+sudo dnf module list php
+sudo dnf -y module reset php
+```
+Enable PHP 8.1 with the following command.
+```sh
+sudo dnf module install php:remi-8.1
+```
+Now install php 8.1 and the required extensions.
+```sh
+sudo dnf install php -y
+yum -y install php-cli php-common php-fpm php-gd php-mbstring php-pecl-mcrypt php-mysqlnd php-odbc php-pdo php-xml  php-opcache php-imap php-bcmath php-ldap php-pecl-zip php-soap php-redis
+```
+
+### Rocky 9
 
 ```sh
 sudo dnf upgrade --refresh -y
-```
-
-```sh
-sudo dnf install \
-    https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \
-    https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-8.noarch.rpm
-```
-
-```sh
-sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
-
-```
----
-
-### Alma 9 
-
-```sh
-sudo dnf upgrade --refresh -y
-```
-```
+sudo dnf config-manager --set-enabled crb
 sudo dnf install \
     https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
     https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-9.noarch.rpm
-```
-
-```
+    
 sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm -y
 ```
-
---- 
 Use the dnf module list command to see the options available for php
 
 ```sh
@@ -99,6 +102,8 @@ Now install php 8.1 and the required extensions.
 sudo dnf install php -y
 yum -y install php-cli php-common php-fpm php-gd php-mbstring php-pecl-mcrypt php-mysqlnd php-odbc php-pdo php-xml  php-opcache php-imap php-bcmath php-ldap php-pecl-zip php-soap php-redis
 ```
+
+
 <b> 1.b. Install and run Nginx </b>
 
 Use the below steps to install and start Nginx
@@ -142,13 +147,6 @@ sudo systemctl enable --now mariadb
 sudo systemctl start --now mariadb
 ```
 
-
-Secure your MySql installation by executing the below command. Set Password for mysql root user, remove anonymous users, disallow remote root login, remove the test databases and finally reload the privilege tables.
-
-```sh
-mariadb-secure-installation  
-```
-
 ### MySQL 8.0
 
 ```sh
@@ -158,10 +156,11 @@ dnf install mysql mysql-server
 systemctl enable --now mysqld
 systemctl start mysqld
 ```
+
 Secure your MySql installation by executing the below command. Set Password for mysql root user, remove anonymous users, disallow remote root login, remove the test databases and finally reload the privilege tables.
 
 ```sh
-mysql_secure_installation
+mariadb-secure-installation  
 ```
 
 <b>1.e. Install wkhtmltopdf</b>
@@ -176,6 +175,7 @@ yum install -y xorg-x11-fonts-75dpi xorg-x11-fonts-Type1 libpng libjpeg openssl 
 wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox-0.12.6.1-2.almalinux9.x86_64.rpm
 sudo dnf install ./wkhtmltox-0.12.6.1-2.almalinux9.x86_64.rpm
 ```
+
 
 <a id="2-upload-faveo" name="2-upload-faveo"></a>
 
@@ -238,6 +238,7 @@ And finally we apply the changes and exit the database.
 FLUSH PRIVILEGES;
 exit
 ```
+
 > **NOTE** :
 > Please refrain from making direct MySQL/MariaDB modifications. Contact our support team for assistance.
 
@@ -406,9 +407,9 @@ To do this, setup a cron that runs every minute that triggers the following comm
 ### <strong>6. Redis Installation</strong>
 Redis is an open-source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
 
-This will improve system performance and is highly recommended.
+This is an optional step and will improve system performance and is highly recommended.
 
-[Redis installation documentation](/docs/installation/providers/enterprise/alma-redis)
+[Redis installation documentation](/docs/installation/providers/enterprise/rocky-redis)
 
 <a id="7-ssl-installation" name="7-ssl-installation"></a>
 
@@ -416,9 +417,9 @@ This will improve system performance and is highly recommended.
 
 Secure Sockets Layer (SSL) is a standard security technology for establishing an encrypted link between a server and a client. Let's Encrypt is a free, automated, and open certificate authority.
 
-This is an optional step and will improve system security and is highly recommended.
+This will improve system security and is highly recommended.
 
-[Let’s Encrypt SSL installation documentation](/docs/installation/providers/enterprise/alma-nginx-ssl)
+[Let’s Encrypt SSL installation documentation](/docs/installation/providers/enterprise/rocky-nginx-ssl)
 
 <a id="8-install-faveo" name="8-install-faveo"></a>
 
@@ -440,4 +441,3 @@ At this stage, Faveo has been installed, it is time to setup the backup for Fave
 ### <strong>10. Final step</strong>
 
 The final step is to have fun with your newly created instance, which should be up and running to `http://localhost` or the domain you have configured Faveo with.
-

@@ -1,17 +1,17 @@
 ---
 layout: single
 type: docs
-permalink: /docs/installation/providers/enterprise/alma9-nginx/
+permalink: /docs/installation/providers/enterprise/rhel9-nginx/
 redirect_from:
   - /theme-setup/
 last_modified_at: 2023-12-02
 toc: true
-title: Installing Faveo Helpdesk Alma Linux with Nginx Webserver
+title: Installing Faveo Helpdesk on Rhel OS 9 With Nginx Webserver
 ---
 
-<img alt="Alma Linux Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/AlmaLinux_Icon_Logo.svg/1024px-AlmaLinux_Icon_Logo.svg.png?20211201021832" width="200"  />
+<img alt="Rhel OS Logo" src="https://1000logos.net/wp-content/uploads/2021/04/Red-Hat-logo.png" width="200"  />
 
-Faveo can run on [Alma Linux](https://almalinux.org/).
+Faveo can run on [RHEL 9 ](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux).
 
 - [<strong>Installation steps :</strong>](#installation-steps-)
     - [<strong> 1. Update your Packages and install some utility tools</strong>](#-1-update-your-packages-and-install-some-utility-tools)
@@ -31,10 +31,11 @@ Faveo can run on [Alma Linux](https://almalinux.org/).
 
 Faveo depends on the following:
 
--   **Web Server**  Nginx/Apache 
+-   **Web Server**  Nginx/Apache
 -   **PHP 8.1+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip
 -   **MySQL 8.0+** or **MariaDB 10.6+**
 -   **SSL** ,Trusted CA Signed or Self-Signed SSL
+
 
 <a id="-1-update-your-packages-and-install-some-utility-tools" name="-1-update-your-packages-and-install-some-utility-tools"></a>
 
@@ -51,40 +52,29 @@ yum update -y && yum install unzip wget nano yum-utils curl openssl zip git -y
 
 <b> 1.a. Install php-8.1 Packages </b>
 
-### Alma 8 
+
+### RHEL 8
 
 ```sh
 sudo dnf upgrade --refresh -y
-```
-
-```sh
 sudo dnf install \
     https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \
     https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-8.noarch.rpm
-```
-
-```sh
+    
 sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
-
 ```
----
 
-### Alma 9 
+### RHEL 9
 
 ```sh
 sudo dnf upgrade --refresh -y
-```
-```
 sudo dnf install \
     https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
     https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-9.noarch.rpm
-```
-
-```
+    
 sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm -y
 ```
 
---- 
 Use the dnf module list command to see the options available for php
 
 ```sh
@@ -130,6 +120,7 @@ The official Faveo installation uses Mysql as the database system and **this is 
 Note: Currently Faveo supports MySQL 8.0 and MariaDB-10.6.
 
 Installby running the following commands.
+
 
 ### MariadDB-10.6 
 
@@ -238,6 +229,7 @@ And finally we apply the changes and exit the database.
 FLUSH PRIVILEGES;
 exit
 ```
+
 > **NOTE** :
 > Please refrain from making direct MySQL/MariaDB modifications. Contact our support team for assistance.
 
@@ -408,7 +400,7 @@ Redis is an open-source (BSD licensed), in-memory data structure store, used as 
 
 This will improve system performance and is highly recommended.
 
-[Redis installation documentation](/docs/installation/providers/enterprise/alma-redis)
+[Redis installation documentation](/docs/installation/providers/enterprise/rhel-redis)
 
 <a id="7-ssl-installation" name="7-ssl-installation"></a>
 
@@ -418,7 +410,7 @@ Secure Sockets Layer (SSL) is a standard security technology for establishing an
 
 This is an optional step and will improve system security and is highly recommended.
 
-[Let’s Encrypt SSL installation documentation](/docs/installation/providers/enterprise/alma-nginx-ssl)
+[Let’s Encrypt SSL installation documentation](/docs/installation/providers/enterprise/rhel-nginx-ssl)
 
 <a id="8-install-faveo" name="8-install-faveo"></a>
 
@@ -440,4 +432,3 @@ At this stage, Faveo has been installed, it is time to setup the backup for Fave
 ### <strong>10. Final step</strong>
 
 The final step is to have fun with your newly created instance, which should be up and running to `http://localhost` or the domain you have configured Faveo with.
-

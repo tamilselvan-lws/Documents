@@ -1,22 +1,22 @@
 ---
 layout: single
 type: docs
-permalink: /docs/installation/providers/enterprise/self-signed-ssl-alma-nginx/
+permalink: /docs/installation/providers/enterprise/self-signed-ssl-rocky-nginx/
 redirect_from:
   - /theme-setup/
-last_modified_at: 2023-11-05
+last_modified_at: 2023-11-06
 toc: true
-title: Install Self-Signed SSL for Faveo on Alma Linux
+title: Install Self-Signed SSL for Faveo on Rocky
 ---
 
-<img alt="Alma linux Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/AlmaLinux_Icon_Logo.svg/1024px-AlmaLinux_Icon_Logo.svg.png?20211201021832" width="200"  />
+<img alt="Cent OS Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Rocky_Linux_wordmark.svg/800px-Rocky_Linux_wordmark.svg.png" width="200"  />
 
 
 ## Introduction
-This document will guide on how to install Self-Signed SSL certificates on Alma Linux with nginx.
+This document will guide on how to install Self-Signed SSL certificates on Rocky Linux with nginx.
 
 ## Setting up the SSL certificate
-To Install Self Signed SSL certificates in Amla Linux 9, We need to create SSL Cetificates which is signed by the CA certificate, after that we need to add the Virtual host file for the SSL certificate and edit the php.ini file and the hosts file the steps are explained below.
+To Install Self Signed SSL certificates in Rocky Linux, We need to create SSL Cetificates which is signed by the CA certificate, after that we need to add the Virtual host file for the SSL certificate and edit the php.ini file and the hosts file the steps are explained below.
 
 ## <strong>Steps</strong>
 
@@ -110,7 +110,7 @@ cp faveolocal.crt /etc/pki/tls/certs
 cp private.key /etc/pki/tls/private
 cp faveorootCA.crt /etc/pki/ca-trust/source/anchors/
 ```
-- Then adding the Virtual host file, for that we need to create a file in webserver directory as <b>/etc/nginx/nginx.conf.</b>
+- Then adding the Virtual host file, for that we need to create a file in webserver directory as <b> nano /etc/nginx/nginx.conf.</b>
 - Add the following lines to your Nginx configuration, modifying the file paths as needed:
 
 ```
@@ -120,6 +120,7 @@ ssl_certificate_key /etc/pki/tls/private/private.key;
 ```
 
 <img src="https://raw.githubusercontent.com/tamilselvan-lws/Documents/main/INSTALLATION%20GUIDE/Images/ad-configuration/ssl-nginx-config.png" style=" width:500px ; height:250px ">
+
 
 ## After Creating the Virtual Host file we need to add the local host for the domain.
 
@@ -136,8 +137,7 @@ nano /etc/hosts
 ```
 127.0.0.1  ---Domain or IP---
 ```
-- After the above is done then we need to add the the ca-cert file path to the <b>/etc/php.ini</b> file add the path to the openssl.cafile like this :
-
+- After the above is done then we need to add the the ca-cert file path to the <b>/etc/php.ini</b> file add the path to the openssl.cafile like this : 
 ```
 openssl.cafile = "/etc/pki/tls/certs/ca-bundle.crt"
 ```
