@@ -6,7 +6,7 @@ redirect_from:
   - /theme-setup/
 last_modified_at: 2022-11-25
 toc: true
-title: Install and configure Redis, Supervisor and Worker for Faveo on RHEL OS 9
+title: Install and configure Redis, Supervisor and Worker for Faveo on RHEL OS
 
 ---
 

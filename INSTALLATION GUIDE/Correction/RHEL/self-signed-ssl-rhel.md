@@ -6,7 +6,7 @@ redirect_from:
   - /theme-setup/
 last_modified_at: 2022-11-25
 toc: true
-title: Install Self-Signed SSL for Faveo on RHEL 9
+title: Install Self-Signed SSL for Faveo on RHEL
 
 ---
 
@@ -15,10 +15,10 @@ title: Install Self-Signed SSL for Faveo on RHEL 9
 
 
 ## Introduction
-This document will guide on how to install Self-Signed SSL certificates on RHEL 9 with apahce.
+This document will guide on how to install Self-Signed SSL certificates on RHEL with apahce.
 
 ## Setting up the SSL certificate
-To Install Self Signed SSL certificates in RHEL 9, We need to create SSL Cetificates which is signed by the CA certificate, after that we need to add the Virtual host file for the SSL certificate and edit the php.ini file and the hosts file the steps are explained below.
+To Install Self Signed SSL certificates in RHEL, We need to create SSL Cetificates which is signed by the CA certificate, after that we need to add the Virtual host file for the SSL certificate and edit the php.ini file and the hosts file the steps are explained below.
 
 ## <strong>Steps</strong>
 

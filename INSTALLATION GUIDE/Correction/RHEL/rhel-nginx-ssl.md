@@ -8,14 +8,14 @@ last_modified_at: 2023-02-19
 toc: true
 ---
 
-# Install LetsEncrypt SSL for Faveo on RHEL OS 9 Running NGINX Web Server <!-- omit in toc -->
+# Install LetsEncrypt SSL for Faveo on RHEL OS Running NGINX Web Server <!-- omit in toc -->
 
 
 <img alt="Rhel OS Logo" src="https://1000logos.net/wp-content/uploads/2021/04/Red-Hat-logo.png" width="200"  />
 
 
 ## Introduction
-This document will list on how to install Let’s Encrypt SSL on RHEL 9 Running Nginx Web Server
+This document will list on how to install Let’s Encrypt SSL on RHEL Running Nginx Web Server
 
 PS : Please replace example.com with your valid domain name which is mapped with your server
 
@@ -31,7 +31,7 @@ We will install following dependencies in order to make Let’s Encrypt SSL work
 yum install epel-release mod_ssl
 ```
 
-## Downloading the LetsEncrypt for RHEL-OS 9
+## Downloading the LetsEncrypt for RHEL-OS
 
 ```sh
 yum install python3-certbot-nginx
