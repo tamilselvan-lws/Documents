@@ -18,7 +18,7 @@
 ```
 ### 2. Hostname: TS-Rocky9
 ```
-   IP: 212.2.246.166
+   IP: 212.2.241.32
    Domain: https://rocky.thetamilselvan.in
 ```
 
