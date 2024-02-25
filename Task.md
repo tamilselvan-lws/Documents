@@ -15,11 +15,15 @@
 ``` 
    IP: 65.108.243.176
    Domain: https://debian.thetamilselvan.in
+   Username: lwsadmin
+   Password: Ladybird@123$#
 ```
 ### 2. Hostname: TS-Rocky9
 ```
    IP: 212.2.241.32
    Domain: https://rocky.thetamilselvan.in
+   Username: lwsadmin
+   Password: Ladybird@123$#
 ```
 
 #### Add lwsadmin User and root enable (Rocky Linux)
@@ -175,8 +179,8 @@ tail -f /var/log/zabbix/zabbix_server.log
 nano /etc/zabbix/zabbix_agentd.conf
 ```
 ```
-Server=127.0.0.1
-ServerActive=127.0.0.1
+Server=65.108.243.176
+ServerActive=65.108.243.176
 Hostname=TS-Rocky9
 ```
 ```
@@ -337,7 +341,7 @@ metadata:
   name: awx-demo
 spec:
   service_type: nodeport
-  nodeport_port: 30080
+  nodeport_port: 30133
 ```
 
 Make sure to add this new file to the list of "resources" in your kustomization.yaml file:
@@ -417,7 +421,7 @@ ansible_host: 65.108.243.176
 
 ```yaml
 ---
-ansible_host: 212.2.246.166
+ansible_host: 212.2.241.32
 ```
 
 
